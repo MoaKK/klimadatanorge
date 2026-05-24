@@ -10,7 +10,7 @@ const NORWAY_CENTER: [number, number] = [15, 65];
 const DEFAULT_ZOOM = 4;
 const OFMAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
-const MapView = () => {
+function MapView() {
   const containerRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
 
@@ -28,7 +28,7 @@ const MapView = () => {
     return () => map.remove();
   }, [locale]);
 
-  return <div ref={containerRef} className="w-full h-screen" />;
-};
+  return <div ref={containerRef} className="w-full h-full" />;
+}
 
 export { MapView };
