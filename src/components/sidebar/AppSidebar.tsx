@@ -37,8 +37,8 @@ function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip="Klimakart">
               <Link href="/">
-                <Map className="size-4 shrink-0 ml-2" />
-                <span className="font-semibold group-data-[collapsible=icon]:hidden">Klimakart</span>
+                <Map className="size-4 shrink-0 ml-2 sm:size-5" />
+                <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden sm:text-base">Klimakart</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -57,7 +57,7 @@ function AppSidebar() {
                     tooltip={title}
                   >
                     <Link href={href}>
-                      <Icon />
+                      <Icon className="size-[clamp(1rem,2vw,1.25rem)]" />
                       <span>{title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -67,7 +67,7 @@ function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="m-auto">
         <LocaleSwitcher />
       </SidebarFooter>
       <SidebarRail />

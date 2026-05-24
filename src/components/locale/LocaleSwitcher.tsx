@@ -30,11 +30,13 @@ function LocaleSwitcher() {
           size="icon"
           title={ t("changeLanguage") }
           aria-label={ t("changeLanguage") }
+          className="gap-1"
         >
-          <Globe2Icon className="h-[1.2rem] w-[1.2rem]" aria-hidden="true" />
+          <Globe2Icon className="size-4 sm:size-5" aria-hidden="true" />
+          <span>{t("changeLanguage")}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="center">
         { routing.locales.map((locale) => {
           const { countryCode, label } = LOCALE_CONFIG[locale];
           return (
@@ -48,7 +50,7 @@ function LocaleSwitcher() {
                 <ReactCountryFlag
                   countryCode={ countryCode }
                   svg
-                  style={ { width: "1rem", height: "1rem" } }
+                  style={{ width: "clamp(0.875rem, 2vw, 1.25rem)", height: "clamp(0.875rem, 2vw, 1.25rem)" }}
                   aria-hidden="true"
                 />
                 { label }

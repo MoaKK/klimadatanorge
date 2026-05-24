@@ -32,7 +32,8 @@
     "loading": "Loading map...",
     "error": "Something went wrong",
     "retry": "Try again",
-    "refresh": "Refresh page"
+    "refresh": "Refresh page",
+    "toggleSidebar": "Toggle sidebar"
   },
   "errors": {
     "network": "Network error. Check your connection and try again.",

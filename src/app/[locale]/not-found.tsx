@@ -19,10 +19,10 @@ async function NotFound() {
       <Empty>
         <EmptyHeader>
           <EmptyMedia variant="icon">
-            <MapPinOff />
+            <MapPinOff className="size-[clamp(2rem,5vw,3rem)]" />
           </EmptyMedia>
-          <EmptyTitle>{t("title")}</EmptyTitle>
-          <EmptyDescription>{t("description")}</EmptyDescription>
+          <EmptyTitle className="text-sm sm:text-lg md:text-xl">{t("title")}</EmptyTitle>
+          <EmptyDescription className="text-xs sm:text-sm md:text-base">{t("description")}</EmptyDescription>
         </EmptyHeader>
         <EmptyContent className="justify-center">
           <Button variant="default" asChild>

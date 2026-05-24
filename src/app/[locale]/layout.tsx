@@ -1,12 +1,14 @@
 import { hasLocale } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { routing } from "@/i18n/routing";
 import { AppSidebar } from "@/components/sidebar/AppSidebar";
 import { MapClient } from "@/components/map/MapClient";
+import { Suspense } from "react";
+import { MapSkeleton } from "@/components/map/MapSkeleton";
 
 type Props = {
   children: React.ReactNode;
@@ -23,18 +25,26 @@ async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   const messages = await getMessages();
+  const t = await getTranslations("ui");
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={ locale } messages={ messages }>
       <TooltipProvider>
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset className="relative overflow-hidden">
-            <MapClient />
+            <Suspense name="map" fallback={ <MapSkeleton /> }>
+              <MapClient />
+            </Suspense>
             <div className="absolute top-2 left-2 z-10">
-              <SidebarTrigger variant="secondary" />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <SidebarTrigger variant="secondary" aria-label={t("toggleSidebar")} />
+                </TooltipTrigger>
+                <TooltipContent side="right">{t("toggleSidebar")}</TooltipContent>
+              </Tooltip>
             </div>
-            {children}
+            { children }
           </SidebarInset>
         </SidebarProvider>
       </TooltipProvider>
