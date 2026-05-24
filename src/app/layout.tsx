@@ -1,24 +1,21 @@
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+import { ReactNode } from "react";
 import "./globals.css";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "Klimakart",
   description: "Norwegian climate change interactive map",
 };
 
-const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+async function RootLayout({ children }: { children: ReactNode }) {
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className={cn("font-sans dark", geist.variable)}>
+    <html lang={locale} className="dark">
       <body>{children}</body>
     </html>
   );
-};
+}
 
 export default RootLayout;

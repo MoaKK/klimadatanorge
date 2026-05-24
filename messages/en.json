@@ -5,6 +5,11 @@
     "switchTo": "Switch to {locale}",
     "changeLanguage": "Change language"
   },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "back": "Go home"
+  },
   "nav": {
     "modes": "Map modes",
     "about": "About"

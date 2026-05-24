@@ -1,6 +1,6 @@
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 type Props = {
@@ -15,7 +15,7 @@ async function Page({ params }: Props) {
   }
 
   setRequestLocale(locale);
-  redirect(`/${locale}/co2`);
+  return null;
 }
 
 export default Page;

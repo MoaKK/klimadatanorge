@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-const Page = () => {
+function Page() {
   redirect("/nb");
-};
+}
 
 export default Page;

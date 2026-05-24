@@ -7,6 +7,8 @@ const MapView = dynamic(
   { ssr: false }
 );
 
-const MapClient = () => <MapView />;
+function MapClient() {
+  return <MapView />;
+}
 
 export { MapClient };

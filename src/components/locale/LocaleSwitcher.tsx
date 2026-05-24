@@ -18,7 +18,7 @@ const LOCALE_CONFIG = {
   en: { countryCode: "GB", label: "EN" },
 } satisfies Record<(typeof routing.locales)[number], { countryCode: string; label: string }>;
 
-const LocaleSwitcher = () => {
+function LocaleSwitcher() {
   const pathname = usePathname();
   const t = useTranslations("locale");
 
@@ -59,6 +59,6 @@ const LocaleSwitcher = () => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
+}
 
 export { LocaleSwitcher };

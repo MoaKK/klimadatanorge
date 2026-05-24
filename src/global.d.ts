@@ -7,3 +7,8 @@ declare module "next-intl" {
     Messages: typeof messages;
   }
 }
+
+declare module "*.css" {
+  const content: Record<string, string>;
+  export default content;
+}
