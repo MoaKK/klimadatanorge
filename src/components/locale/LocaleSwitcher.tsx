@@ -19,7 +19,7 @@ const LocaleSwitcher = () => {
   };
 
   return (
-    <Button variant="ghost" size="sm" onClick={switchLocale}>
+    <Button variant="default" size="sm" onClick={switchLocale}>
       {t(nextLocale)}
     </Button>
   );
