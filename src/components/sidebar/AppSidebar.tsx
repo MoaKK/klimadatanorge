@@ -48,7 +48,7 @@ function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>{tNav("modes")}</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-2">
               {modes.map(({ key, href, icon: Icon, title }) => (
                 <SidebarMenuItem key={key}>
                   <SidebarMenuButton

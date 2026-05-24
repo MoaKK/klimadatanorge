@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { ReactNode } from "react";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   description: "Norwegian climate change interactive map",
 };
 
-async function RootLayout({ children }: { children: React.ReactNode }) {
+async function RootLayout({ children }: { children: ReactNode }) {
   const locale = await getLocale();
 
   return (
