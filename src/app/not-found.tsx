@@ -16,7 +16,7 @@ function NotFound() {
       <Empty>
         <EmptyHeader>
           <EmptyMedia variant="icon">
-            <MapPinOff />
+            <MapPinOff className="size-[clamp(2rem,5vw,3rem)]" />
           </EmptyMedia>
           <EmptyTitle className="text-sm sm:text-lg md:text-xl">
             Siden ble ikke funnet / Page not found

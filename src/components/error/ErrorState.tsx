@@ -21,11 +21,11 @@ function ErrorState({ reset }: Props) {
   const tErrors = useTranslations("errors");
 
   return (
-    <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+    <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/80 px-4 backdrop-blur-sm">
       <Empty>
         <EmptyHeader>
           <EmptyMedia variant="icon">
-            <CircleAlert style={{height: 48, width:48}}/>
+            <CircleAlert className="size-10 sm:size-14" />
           </EmptyMedia>
           <EmptyTitle className="text-sm sm:text-lg md:text-xl">{t("error")}</EmptyTitle>
           <EmptyDescription className="text-xs sm:text-sm md:text-base">{tErrors("unknown")}</EmptyDescription>

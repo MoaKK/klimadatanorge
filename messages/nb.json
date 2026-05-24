@@ -32,7 +32,8 @@
     "loading": "Laster kart...",
     "error": "Noe gikk galt",
     "retry": "Prøv igjen",
-    "refresh": "Last inn på nytt"
+    "refresh": "Last inn på nytt",
+    "toggleSidebar": "Endre sidepanel"
   },
   "errors": {
     "network": "Nettverksfeil. Sjekk tilkoblingen din og prøv igjen.",

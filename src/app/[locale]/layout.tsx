@@ -1,8 +1,8 @@
 import { hasLocale } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { routing } from "@/i18n/routing";
 import { AppSidebar } from "@/components/sidebar/AppSidebar";
@@ -25,6 +25,7 @@ async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
 
   const messages = await getMessages();
+  const t = await getTranslations("ui");
 
   return (
     <NextIntlClientProvider locale={ locale } messages={ messages }>
@@ -36,7 +37,12 @@ async function LocaleLayout({ children, params }: Props) {
               <MapClient />
             </Suspense>
             <div className="absolute top-2 left-2 z-10">
-              <SidebarTrigger variant="secondary" />
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <SidebarTrigger variant="secondary" aria-label={t("toggleSidebar")} />
+                </TooltipTrigger>
+                <TooltipContent side="right">{t("toggleSidebar")}</TooltipContent>
+              </Tooltip>
             </div>
             { children }
           </SidebarInset>
