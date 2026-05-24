@@ -29,7 +29,7 @@ async function LocaleLayout({ children, params }: Props) {
       <TooltipProvider>
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset className="relative h-screen overflow-hidden">
+          <SidebarInset className="relative overflow-hidden">
             <MapClient />
             <div className="absolute top-2 left-2 z-10">
               <SidebarTrigger variant="secondary" />

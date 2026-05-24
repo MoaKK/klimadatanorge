@@ -28,7 +28,7 @@ function MapView() {
     return () => map.remove();
   }, [locale]);
 
-  return <div ref={containerRef} className="w-full h-full" />;
+  return <div ref={containerRef} className="relative w-full h-full" />;
 }
 
 export { MapView };
