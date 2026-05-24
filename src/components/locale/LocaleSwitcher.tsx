@@ -1,27 +1,62 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { Globe2Icon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import ReactCountryFlag from "react-country-flag";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { routing } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/navigation";
+
+const LOCALE_CONFIG = {
+  nb: { countryCode: "NO", label: "NO" },
+  en: { countryCode: "GB", label: "EN" },
+} satisfies Record<(typeof routing.locales)[number], { countryCode: string; label: string }>;
 
 const LocaleSwitcher = () => {
-  const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("locale");
 
-  const nextLocale =
-    routing.locales.find((l) => l !== locale) ?? routing.defaultLocale;
-
-  const switchLocale = () => {
-    router.replace(pathname, { locale: nextLocale });
-  };
-
   return (
-    <Button variant="default" size="sm" onClick={switchLocale}>
-      {t(nextLocale)}
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="default"
+          size="icon"
+          title={t("changeLanguage")}
+          aria-label={t("changeLanguage")}
+        >
+          <Globe2Icon className="h-[1.2rem] w-[1.2rem]" aria-hidden="true" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {routing.locales.map((locale) => {
+          const { countryCode, label } = LOCALE_CONFIG[locale];
+          return (
+            <DropdownMenuItem key={locale} asChild>
+              <Link
+                href={pathname}
+                locale={locale}
+                className="flex cursor-pointer items-center gap-2"
+              >
+                <ReactCountryFlag
+                  countryCode={countryCode}
+                  svg
+                  style={{ width: "1rem", height: "1rem" }}
+                  aria-hidden="true"
+                />
+                {label}
+              </Link>
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
