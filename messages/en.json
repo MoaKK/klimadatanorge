@@ -2,7 +2,8 @@
   "locale": {
     "nb": "Norwegian",
     "en": "English",
-    "switchTo": "Switch to {locale}"
+    "switchTo": "Switch to {locale}",
+    "changeLanguage": "Change language"
   },
   "nav": {
     "modes": "Map modes",
