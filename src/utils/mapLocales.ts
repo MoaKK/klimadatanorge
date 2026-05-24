@@ -1,6 +1,6 @@
 import type { Locale } from "next-intl";
 
-const nbMapLocale: Partial<Record<string, string>> = {
+const nbMapLocale: Record<string, string> = {
   "AttributionControl.ToggleAttribution": "Vis/skjul attribuering",
   "AttributionControl.MapFeedback": "Tilbakemelding om kart",
   "FullscreenControl.Enter": "Gå til fullskjerm",
@@ -18,7 +18,7 @@ const nbMapLocale: Partial<Record<string, string>> = {
   "CooperativeGesturesHandler.MobileHelpText": "Bruk to fingre for å flytte kartet",
 };
 
-const mapLocales: Record<Locale, Partial<Record<string, string>>> = {
+const mapLocales: Record<Locale, Record<string, string>> = {
   nb: nbMapLocale,
   en: {},
 };

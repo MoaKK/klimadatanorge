@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Norwegian climate change interactive map",
 };
 
-const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+async function RootLayout({ children }: { children: React.ReactNode }) {
   const locale = await getLocale();
 
   return (
@@ -19,6 +19,6 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <body>{children}</body>
     </html>
   );
-};
+}
 
 export default RootLayout;

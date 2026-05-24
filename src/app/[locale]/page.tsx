@@ -9,7 +9,7 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const Page = async ({ params }: Props) => {
+async function Page({ params }: Props) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -26,6 +26,6 @@ const Page = async ({ params }: Props) => {
       </div>
     </div>
   );
-};
+}
 
 export default Page;
