@@ -7,6 +7,8 @@ import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/s
 import { routing } from "@/i18n/routing";
 import { AppSidebar } from "@/components/sidebar/AppSidebar";
 import { MapClient } from "@/components/map/MapClient";
+import { Suspense } from "react";
+import { MapSkeleton } from "@/components/map/MapSkeleton";
 
 type Props = {
   children: React.ReactNode;
@@ -25,16 +27,18 @@ async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={ locale } messages={ messages }>
       <TooltipProvider>
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset className="relative overflow-hidden">
-            <MapClient />
+            <Suspense name="map" fallback={ <MapSkeleton /> }>
+              <MapClient />
+            </Suspense>
             <div className="absolute top-2 left-2 z-10">
               <SidebarTrigger variant="secondary" />
             </div>
-            {children}
+            { children }
           </SidebarInset>
         </SidebarProvider>
       </TooltipProvider>
