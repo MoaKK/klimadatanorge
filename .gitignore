@@ -42,3 +42,6 @@ next-env.d.ts
 
 #ai-code-reviewer
 scripts/node_modules/
+
+#python
+.venv/
