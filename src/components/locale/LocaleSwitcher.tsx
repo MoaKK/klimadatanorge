@@ -28,33 +28,34 @@ const LocaleSwitcher = () => {
         <Button
           variant="default"
           size="icon"
-          title={t("changeLanguage")}
-          aria-label={t("changeLanguage")}
+          title={ t("changeLanguage") }
+          aria-label={ t("changeLanguage") }
         >
           <Globe2Icon className="h-[1.2rem] w-[1.2rem]" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {routing.locales.map((locale) => {
+        { routing.locales.map((locale) => {
           const { countryCode, label } = LOCALE_CONFIG[locale];
           return (
-            <DropdownMenuItem key={locale} asChild>
+            <DropdownMenuItem key={ locale } asChild>
               <Link
-                href={pathname}
-                locale={locale}
+                href={ pathname }
+                locale={ locale }
                 className="flex cursor-pointer items-center gap-2"
+                title={ t("switchTo", { locale: t(locale) }) }
               >
                 <ReactCountryFlag
-                  countryCode={countryCode}
+                  countryCode={ countryCode }
                   svg
-                  style={{ width: "1rem", height: "1rem" }}
+                  style={ { width: "1rem", height: "1rem" } }
                   aria-hidden="true"
                 />
-                {label}
+                { label }
               </Link>
             </DropdownMenuItem>
           );
-        })}
+        }) }
       </DropdownMenuContent>
     </DropdownMenu>
   );
