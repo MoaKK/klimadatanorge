@@ -16,10 +16,12 @@ function GlobalError({ error, reset }: Props) {
     <html lang="nb" className="dark">
       <body className="flex h-screen items-center justify-center bg-background text-foreground">
         <div className="flex flex-col items-center gap-4 text-center">
-          <p className="text-muted-foreground">Noe gikk galt / Something went wrong</p>
+          <p className="text-sm text-muted-foreground sm:text-base">
+            Noe gikk galt / Something went wrong
+          </p>
           <button
             onClick={reset}
-            className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground"
+            className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground sm:text-base"
           >
             Prøv igjen / Try again
           </button>

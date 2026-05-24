@@ -27,8 +27,8 @@ function ErrorState({ reset }: Props) {
           <EmptyMedia variant="icon">
             <CircleAlert style={{height: 48, width:48}}/>
           </EmptyMedia>
-          <EmptyTitle>{t("error")}</EmptyTitle>
-          <EmptyDescription>{tErrors("unknown")}</EmptyDescription>
+          <EmptyTitle className="text-sm sm:text-lg md:text-xl">{t("error")}</EmptyTitle>
+          <EmptyDescription className="text-xs sm:text-sm md:text-base">{tErrors("unknown")}</EmptyDescription>
         </EmptyHeader>
         <EmptyContent className="justify-center">
           <Button onClick={reset}>{t("retry")}</Button>
