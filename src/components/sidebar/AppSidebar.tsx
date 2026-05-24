@@ -37,8 +37,8 @@ function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip="Klimakart">
               <Link href="/">
-                <Map className="size-4" />
-                <span className="font-semibold">Klimakart</span>
+                <Map className="size-4 shrink-0 ml-2" />
+                <span className="font-semibold group-data-[collapsible=icon]:hidden">Klimakart</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

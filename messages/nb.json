@@ -12,15 +12,15 @@
   "modes": {
     "co2": {
       "title": "CO\u2082-utslipp",
-      "description": "Arlige CO\u2082-utslipp for Norge"
+      "description": "Årlige CO\u2082-utslipp for Norge"
     },
     "temperature": {
       "title": "Temperaturavvik",
       "description": "Overflatetemperaturavvik relativt til referanseperioden 1951-1980"
     },
     "sealevel": {
-      "title": "Havnivasstigning",
-      "description": "Anslatte scenarier for kystoversommelse i Norge"
+      "title": "Havnivåstigning",
+      "description": "Anslåtte scenarier for kystoversvømmelser i Norge"
     }
   },
   "ui": {

@@ -3,7 +3,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { routing } from "@/i18n/routing";
 import { AppSidebar } from "@/components/sidebar/AppSidebar";
 import { MapClient } from "@/components/map/MapClient";
@@ -31,6 +31,9 @@ async function LocaleLayout({ children, params }: Props) {
           <AppSidebar />
           <SidebarInset className="relative h-screen overflow-hidden">
             <MapClient />
+            <div className="absolute top-2 left-2 z-10">
+              <SidebarTrigger variant="secondary" />
+            </div>
             {children}
           </SidebarInset>
         </SidebarProvider>
