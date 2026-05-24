@@ -1,0 +1,38 @@
+{
+  "locale": {
+    "nb": "Norwegian",
+    "en": "English",
+    "switchTo": "Switch to {locale}",
+    "changeLanguage": "Change language"
+  },
+  "nav": {
+    "modes": "Map modes",
+    "about": "About"
+  },
+  "modes": {
+    "co2": {
+      "title": "CO\u2082 Emissions",
+      "description": "Annual CO\u2082 emissions for Norway"
+    },
+    "temperature": {
+      "title": "Temperature Anomaly",
+      "description": "Surface temperature anomaly relative to 1951-1980 baseline"
+    },
+    "sealevel": {
+      "title": "Sea Level Rise",
+      "description": "Projected coastal flood risk scenarios for Norway"
+    }
+  },
+  "ui": {
+    "loading": "Loading map...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "refresh": "Refresh page"
+  },
+  "errors": {
+    "network": "Network error. Check your connection and try again.",
+    "dataLoad": "Failed to load climate data.",
+    "mapLoad": "Failed to load the map.",
+    "unknown": "An unexpected error occurred."
+  }
+}

@@ -1,7 +1,7 @@
-import { MapClient } from "@/components/map/MapClient";
+import { redirect } from "next/navigation";
 
 const Page = () => {
-  return <MapClient />;
+  redirect("/nb");
 };
 
 export default Page;
