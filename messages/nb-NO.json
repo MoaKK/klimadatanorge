@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "modes": "Kartlag",
+    "about": "Om"
+  },
+  "modes": {
+    "co2": {
+      "title": "CO\u2082-utslipp",
+      "description": "Arlige CO\u2082-utslipp for Norge"
+    },
+    "temperature": {
+      "title": "Temperaturavvik",
+      "description": "Overflatetemperaturavvik relativt til referanseperioden 1951-1980"
+    },
+    "sealevel": {
+      "title": "Havnivasstigning",
+      "description": "Anslatte scenarier for kystoversommelse i Norge"
+    }
+  },
+  "ui": {
+    "loading": "Laster kart...",
+    "error": "Noe gikk galt",
+    "retry": "Prøv igjen",
+    "refresh": "Last inn på nytt"
+  },
+  "errors": {
+    "network": "Nettverksfeil. Sjekk tilkoblingen din og prøv igjen.",
+    "dataLoad": "Kunne ikke laste klimadata.",
+    "mapLoad": "Kunne ikke laste kartet.",
+    "unknown": "En uventet feil oppstod."
+  }
+}
