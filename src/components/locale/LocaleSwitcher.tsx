@@ -26,7 +26,7 @@ const LocaleSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="default"
+          variant="secondary"
           size="icon"
           title={ t("changeLanguage") }
           aria-label={ t("changeLanguage") }

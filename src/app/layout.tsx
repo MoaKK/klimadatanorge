@@ -15,7 +15,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className={cn("font-sans", geist.variable)}>
+    <html lang={locale} className={cn("font-sans dark", geist.variable)}>
       <body>{children}</body>
     </html>
   );
