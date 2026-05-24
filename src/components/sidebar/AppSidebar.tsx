@@ -1,6 +1,6 @@
 "use client";
 
-import { Factory, Map, Thermometer, Waves } from "lucide-react";
+import { Map } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import {
@@ -17,14 +17,9 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { LocaleSwitcher } from "@/components/locale/LocaleSwitcher";
+import { MODES } from "@/lib/modes";
 
-const MODES = [
-  { key: "co2", href: "/co2", icon: Factory },
-  { key: "temperature", href: "/temperature", icon: Thermometer },
-  { key: "sealevel", href: "/sealevel", icon: Waves },
-] as const;
-
-const AppSidebar = () => {
+function AppSidebar() {
   const pathname = usePathname();
   const tNav = useTranslations("nav");
   const tModes = useTranslations("modes");
@@ -78,6 +73,6 @@ const AppSidebar = () => {
       <SidebarRail />
     </Sidebar>
   );
-};
+}
 
 export { AppSidebar };
