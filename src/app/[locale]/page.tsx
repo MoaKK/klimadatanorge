@@ -1,15 +1,15 @@
+import { setRequestLocale } from "next-intl/server";
 import { MapClient } from "@/components/map/MapClient";
-import { LocaleSwitcher } from "@/components/locale/LocaleSwitcher";
 
-const Page = () => {
-  return (
-    <div className="relative h-screen w-full">
-      <MapClient />
-      <div className="absolute top-4 right-4 z-10">
-        <LocaleSwitcher />
-      </div>
-    </div>
-  );
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+const Page = async ({ params }: Props) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  return <MapClient />;
 };
 
 export default Page;
