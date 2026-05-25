@@ -20,7 +20,6 @@ function SeaLevelLayer({ year, scenario }: Props) {
     setLayersReady(false);
     ensureProtocol();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const initThreshold = getThreshold(year, scenario);
 
     const cleanup = () => {
