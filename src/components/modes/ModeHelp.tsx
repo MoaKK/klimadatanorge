@@ -2,6 +2,7 @@
 
 import { CircleHelp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import {
   Popover,
   PopoverContent,
@@ -16,6 +17,8 @@ type Props = {
 };
 
 function ModeHelp({ children, className }: Props) {
+  const t = useTranslations("ui");
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -25,8 +28,9 @@ function ModeHelp({ children, className }: Props) {
             className
           )}
           variant="ghost"
+          aria-label={t("help")}
         >
-          <span className="relative flex size-5">
+          <span className="relative flex size-5" aria-hidden="true">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/30" />
             <CircleHelp className="relative size-5" />
           </span>
