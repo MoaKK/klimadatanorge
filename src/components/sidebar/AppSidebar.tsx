@@ -28,6 +28,7 @@ function AppSidebar() {
     { ...MODES[0], title: tModes("co2.title") },
     { ...MODES[1], title: tModes("temperature.title") },
     { ...MODES[2], title: tModes("sealevel.title") },
+    { ...MODES[3], title: tModes("precipitation.title") },
   ];
 
   return (
@@ -37,7 +38,7 @@ function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip={ tNav("appName") }>
               <Link href="/">
-                <Map className="size-4 shrink-0 ml-2 sm:size-5" />
+                <Map className="size-4 shrink-0 ml-2 sm:size-5" aria-hidden="true" />
                 <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden sm:text-base">
                   { tNav("appName") }
                 </span>
@@ -59,7 +60,7 @@ function AppSidebar() {
                     tooltip={ title }
                   >
                     <Link href={ href }>
-                      <Icon className="size-[clamp(1rem,2vw,1.25rem)]" />
+                      <Icon className="size-[clamp(1rem,2vw,1.25rem)]" aria-hidden="true" />
                       <span>{ title }</span>
                     </Link>
                   </SidebarMenuButton>

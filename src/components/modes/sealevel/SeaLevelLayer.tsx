@@ -24,6 +24,7 @@ function SeaLevelLayer({ year, scenario }: Props) {
     const initThreshold = getThreshold(year, scenario);
 
     const cleanup = () => {
+      if (!map.loaded()) return;
       try {
         if (map.getLayer(LABEL_LAYER)) map.removeLayer(LABEL_LAYER);
         if (map.getSource(LABEL_SOURCE)) map.removeSource(LABEL_SOURCE);
@@ -76,9 +77,9 @@ function SeaLevelLayer({ year, scenario }: Props) {
       setLayersReady(false);
       cleanup();
     };
-  // year and scenario intentionally omitted: setup only runs when map changes,
-  // and the second effect handles all subsequent updates.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // year and scenario intentionally omitted: setup only runs when map changes,
+    // and the second effect handles all subsequent updates.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map]);
 
   useEffect(() => {

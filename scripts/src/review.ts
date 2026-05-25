@@ -3,8 +3,11 @@ import { getExistingBotCommentKeys, getPRFiles, postReview, postSummary } from "
 import type { ReviewComment } from "./types.js";
 
 async function main() {
-  const files = await getPRFiles();
-  console.log(`Reviewing ${files.length} file(s)...`);
+  const allFiles = await getPRFiles();
+  const files = allFiles.filter(
+    (f) => !f.filename.startsWith("scripts/") && !f.filename.startsWith("preprocessing/")
+  );
+  console.log(`Reviewing ${files.length} file(s) (${allFiles.length - files.length} skipped)...`);
 
   const allComments: ReviewComment[] = [];
 

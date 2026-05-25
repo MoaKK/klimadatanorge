@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import * as d3 from "d3";
 import { useTranslations } from "next-intl";
-import type { Co2Record } from "@/types/co2";
+import type { PrecipitationData } from "@/types/precipitation";
 
 const MARGIN = { top: 12, right: 12, bottom: 24, left: 44 };
 const WIDTH = 300;
@@ -11,14 +11,23 @@ const HEIGHT = 180;
 const INNER_W = WIDTH - MARGIN.left - MARGIN.right;
 const INNER_H = HEIGHT - MARGIN.top - MARGIN.bottom;
 
-type Props = {
-  data: Co2Record[];
-  year: number;
-};
+type YearTotal = { year: number; total: number };
 
-function Co2Chart({ data, year }: Props) {
+type Props = { data: PrecipitationData; year: number };
+
+function PrecipitationChart({ data, year }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const t = useTranslations("modes.co2");
+  const t = useTranslations("modes.precipitation");
+
+  const series: YearTotal[] = useMemo(() => {
+    return data.years.map((y, i) => {
+      const values = data.cells
+        .map((c) => c.data[i])
+        .filter((v): v is number => v !== null);
+      const mean = values.length > 0 ? d3.mean(values) ?? 0 : 0;
+      return { year: y, total: parseFloat(mean.toFixed(1)) };
+    });
+  }, [data]);
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -26,16 +35,15 @@ function Co2Chart({ data, year }: Props) {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const filtered = data.filter((r) => r.co2 > 0);
-
     const x = d3
       .scaleLinear()
-      .domain(d3.extent(filtered, (r) => r.year) as [number, number])
+      .domain(d3.extent(series, (r) => r.year) as [number, number])
       .range([0, INNER_W]);
 
+    const yExtent = d3.extent(series, (r) => r.total) as [number, number];
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(filtered, (r) => r.co2) ?? 100])
+      .domain([yExtent[0] * 0.9, yExtent[1] * 1.05])
       .nice()
       .range([INNER_H, 0]);
 
@@ -44,29 +52,27 @@ function Co2Chart({ data, year }: Props) {
       .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
     g.append("path")
-      .datum(filtered)
-      .attr("fill", "rgba(255,255,255,0.08)")
+      .datum(series)
+      .attr("fill", "rgba(59,130,246,0.2)")
       .attr(
         "d",
-        d3
-          .area<Co2Record>()
+        d3.area<YearTotal>()
           .x((r) => x(r.year))
           .y0(INNER_H)
-          .y1((r) => y(r.co2))
+          .y1((r) => y(r.total))
           .curve(d3.curveMonotoneX)
       );
 
     g.append("path")
-      .datum(filtered)
+      .datum(series)
       .attr("fill", "none")
-      .attr("stroke", "rgba(255,255,255,0.7)")
+      .attr("stroke", "rgba(59,130,246,0.8)")
       .attr("stroke-width", 1.5)
       .attr(
         "d",
-        d3
-          .line<Co2Record>()
+        d3.line<YearTotal>()
           .x((r) => x(r.year))
-          .y((r) => y(r.co2))
+          .y((r) => y(r.total))
           .curve(d3.curveMonotoneX)
       );
 
@@ -79,16 +85,16 @@ function Co2Chart({ data, year }: Props) {
       .style("font-size", "12px");
 
     g.append("g")
-      .call(d3.axisLeft(y).ticks(3).tickFormat((d) => `${d}Mt`))
+      .call(d3.axisLeft(y).ticks(4).tickFormat((d) => `${d}`))
       .call((a) => a.select(".domain").remove())
       .selectAll("text")
       .style("fill", "rgba(255,255,255,0.5)")
       .style("font-size", "12px");
 
-    const record = filtered.find((r) => r.year === year);
+    const record = series.find((r) => r.year === year);
     if (record) {
       const cx = x(record.year);
-      const cy = y(record.co2);
+      const cy = y(record.total);
 
       g.append("line")
         .attr("x1", cx).attr("x2", cx)
@@ -99,22 +105,22 @@ function Co2Chart({ data, year }: Props) {
       g.append("circle")
         .attr("cx", cx).attr("cy", cy)
         .attr("r", 4)
-        .attr("fill", "white");
+        .attr("fill", "rgb(59,130,246)");
     }
-  }, [data, year]);
+  }, [series, year]);
 
   return (
     <div className="absolute right-4 top-5 z-10 w-68 sm:w-[350px] rounded-xl bg-background/80 p-3 backdrop-blur-sm animate-in fade-in duration-1000">
       <svg
-        ref={svgRef}
-        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        ref={ svgRef }
+        viewBox={ `0 0 ${WIDTH} ${HEIGHT}` }
         width="100%"
-        style={{ aspectRatio: `${WIDTH}/${HEIGHT}` }}
+        style={ { aspectRatio: `${WIDTH}/${HEIGHT}` } }
         role="img"
-        aria-label={t("chartAriaLabel")}
+        aria-label={ t("chartAriaLabel") }
       />
     </div>
   );
 }
 
-export { Co2Chart };
+export { PrecipitationChart };
