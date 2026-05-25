@@ -7,6 +7,36 @@ import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/s
 import { routing } from "@/i18n/routing";
 import { AppSidebar } from "@/components/sidebar/AppSidebar";
 import { ReactNode } from "react";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "https://klimadatanorge.no";
+
+  const isNb = locale === "nb";
+  const title = isNb ? "Klima Data Norge" : "Climate Data Norway";
+  const description = isNb
+    ? "Interaktivt kart over klimadata for Norge – CO₂-utslipp, temperaturavvik, havnivåstigning og nedbør."
+    : "Interactive map of climate data for Norway – CO₂ emissions, temperature anomaly, sea level rise, and precipitation.";
+
+  return {
+    title: { default: title, template: `%s | ${title}` },
+    description,
+    metadataBase: new URL(base),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { nb: "/nb", en: "/en" },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${base}/${locale}`,
+      siteName: "Klima Data Norge",
+      locale: isNb ? "nb_NO" : "en_US",
+      type: "website",
+    },
+  };
+}
 
 type Props = {
   children: ReactNode;
