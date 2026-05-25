@@ -17,7 +17,10 @@
   "modes": {
     "co2": {
       "title": "CO\u2082 Emissions",
-      "description": "Annual CO\u2082 emissions for Norway"
+      "description": "Annual CO\u2082 emissions for Norway",
+      "sliderHelp": "Drag the slider to explore Norway\u2019s CO\u2082 emissions year by year. Darker shades mean higher emissions.",
+      "sliderAriaLabel": "Select year for CO\u2082 emissions data",
+      "chartAriaLabel": "Line chart of Norway\u2019s CO\u2082 emissions over time"
     },
     "temperature": {
       "title": "Temperature Anomaly",
@@ -33,7 +36,8 @@
     "error": "Something went wrong",
     "retry": "Try again",
     "refresh": "Refresh page",
-    "toggleSidebar": "Toggle sidebar"
+    "toggleSidebar": "Toggle sidebar",
+    "help": "Help"
   },
   "errors": {
     "network": "Network error. Check your connection and try again.",
