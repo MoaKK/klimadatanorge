@@ -32,80 +32,82 @@ function Co2Layer({ data, year }: Props) {
   useEffect(() => {
     if (!map) return;
 
-    if (!map.getSource(SOURCE_ID)) {
-      map.addSource(SOURCE_ID, {
-        type: "geojson",
-        data: "/data/norway.json",
-      });
+    try {
+      if (!map.getSource(SOURCE_ID)) {
+        map.addSource(SOURCE_ID, {
+          type: "geojson",
+          data: "/data/norway.json",
+        });
+      }
+
+      if (!map.getLayer(FILL_ID)) {
+        map.addLayer({
+          id: FILL_ID,
+          type: "fill",
+          source: SOURCE_ID,
+          paint: { "fill-color": "#ccc", "fill-opacity": 0.7 },
+        });
+      }
+
+      if (!map.getLayer(OUTLINE_ID)) {
+        map.addLayer({
+          id: OUTLINE_ID,
+          type: "line",
+          source: SOURCE_ID,
+          paint: { "line-color": "#fff", "line-width": 1 },
+        });
+      }
+
+      if (!map.getSource(LABEL_SOURCE_ID)) {
+        map.addSource(LABEL_SOURCE_ID, {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: [
+              {
+                type: "Feature",
+                geometry: { type: "Point", coordinates: LABEL_LNGLAT },
+                properties: { label: "" },
+              },
+            ],
+          },
+        });
+      }
+
+      if (!map.getLayer(LABEL_ID)) {
+        map.addLayer({
+          id: LABEL_ID,
+          type: "symbol",
+          source: LABEL_SOURCE_ID,
+          layout: {
+            "text-field": ["get", "label"],
+            "text-size": 30,
+            "text-anchor": "bottom",
+          },
+          paint: {
+            "text-color": "#ffffff",
+            "text-halo-color": "rgba(0,0,0,0.6)",
+            "text-halo-width": 2,
+          },
+        });
+      }
+
+      layersReady.current = true;
+    } catch {
+      return;
     }
-
-    if (!map.getLayer(FILL_ID)) {
-      map.addLayer({
-        id: FILL_ID,
-        type: "fill",
-        source: SOURCE_ID,
-        paint: { "fill-color": "#ccc", "fill-opacity": 0.7 },
-      });
-    }
-
-    if (!map.getLayer(OUTLINE_ID)) {
-      map.addLayer({
-        id: OUTLINE_ID,
-        type: "line",
-        source: SOURCE_ID,
-        paint: { "line-color": "#fff", "line-width": 1 },
-      });
-    }
-
-    if (!map.getSource(LABEL_SOURCE_ID)) {
-      map.addSource(LABEL_SOURCE_ID, {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              geometry: { type: "Point", coordinates: LABEL_LNGLAT },
-              properties: { label: "" },
-            },
-          ],
-        },
-      });
-    }
-
-    if (!map.getLayer(LABEL_ID)) {
-      map.addLayer({
-        id: LABEL_ID,
-        type: "symbol",
-        source: LABEL_SOURCE_ID,
-        layout: {
-          "text-field": ["get", "label"],
-          "text-size": 30,
-          "text-anchor": "bottom",
-        },
-        paint: {
-          "text-color": "#ffffff",
-          "text-halo-color": "rgba(0,0,0,0.6)",
-          "text-halo-width": 2,
-        },
-      });
-    }
-
-    layersReady.current = true;
-
-    let mapDestroyed = false;
-    const onRemove = () => { mapDestroyed = true; };
-    map.on("remove", onRemove);
 
     return () => {
       layersReady.current = false;
-      map.off("remove", onRemove);
-      if (mapDestroyed) return;
-      if (map.getLayer(LABEL_ID)) map.removeLayer(LABEL_ID);
-      if (map.getSource(LABEL_SOURCE_ID)) map.removeSource(LABEL_SOURCE_ID);
-      if (map.getLayer(OUTLINE_ID)) map.removeLayer(OUTLINE_ID);
-      if (map.getLayer(FILL_ID)) map.removeLayer(FILL_ID);
-      if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
+      try {
+        if (map.getLayer(LABEL_ID)) map.removeLayer(LABEL_ID);
+        if (map.getSource(LABEL_SOURCE_ID)) map.removeSource(LABEL_SOURCE_ID);
+        if (map.getLayer(OUTLINE_ID)) map.removeLayer(OUTLINE_ID);
+        if (map.getLayer(FILL_ID)) map.removeLayer(FILL_ID);
+        if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
+      } catch {
+        // map was destroyed before cleanup could run
+      }
     };
   }, [map]);
 
@@ -115,24 +117,28 @@ function Co2Layer({ data, year }: Props) {
     const record = data.find((r) => r.year === year);
     if (!record) return;
 
-    map.setPaintProperty(
-      FILL_ID,
-      "fill-color",
-      record.co2 > 0 ? colorScale(record.co2) : "#ccc"
-    );
+    try {
+      map.setPaintProperty(
+        FILL_ID,
+        "fill-color",
+        record.co2 > 0 ? colorScale(record.co2) : "#ccc"
+      );
 
-    const source = map.getSource(LABEL_SOURCE_ID) as GeoJSONSource;
-    if (source) {
-      source.setData({
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            geometry: { type: "Point", coordinates: LABEL_LNGLAT },
-            properties: { label: `${record.co2.toFixed(1)} Mt CO₂` },
-          },
-        ],
-      });
+      const source = map.getSource(LABEL_SOURCE_ID) as GeoJSONSource;
+      if (source) {
+        source.setData({
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              geometry: { type: "Point", coordinates: LABEL_LNGLAT },
+              properties: { label: `${record.co2.toFixed(1)} Mt CO₂` },
+            },
+          ],
+        });
+      }
+    } catch {
+      // map was destroyed mid-update
     }
   }, [map, year, data, colorScale]);
 
