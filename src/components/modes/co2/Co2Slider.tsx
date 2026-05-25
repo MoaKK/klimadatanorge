@@ -15,7 +15,7 @@ function Co2Slider({ year, min, max, onChange }: Props) {
   const t = useTranslations("modes.co2");
 
   return (
-    <div className="absolute bottom-8 left-1/2 z-10 w-[clamp(16rem,50vw,36rem)] -translate-x-1/2 rounded-xl bg-background/80 px-6 py-4 backdrop-blur-sm">
+    <div className="absolute bottom-8 left-1/2 z-10 w-[clamp(16rem,50vw,36rem)] -translate-x-1/2 rounded-xl bg-background/80 px-6 py-4 backdrop-blur-sm animate-in fade-in duration-1000">
       <ModeHelp className="absolute -top-8 left-0">
         { t("sliderHelp") }
       </ModeHelp>

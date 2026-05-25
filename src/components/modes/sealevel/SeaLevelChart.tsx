@@ -101,8 +101,15 @@ function SeaLevelChart({ year, scenario }: Props) {
   }, [series, year, scenario]);
 
   return (
-    <div className="absolute right-4 top-5 z-10 rounded-xl bg-background/80 p-3 backdrop-blur-sm">
-      <svg ref={svgRef} width={WIDTH} height={HEIGHT} role="img" aria-label={t("chartAriaLabel")} />
+    <div className="absolute right-4 top-5 z-10 w-68 sm:w-[350px] rounded-xl bg-background/80 p-3 backdrop-blur-sm animate-in fade-in duration-1000">
+      <svg
+        ref={ svgRef }
+        viewBox={ `0 0 ${WIDTH} ${HEIGHT}` }
+        width="100%"
+        style={ { aspectRatio: `${WIDTH}/${HEIGHT}` } }
+        role="img"
+        aria-label={ t("chartAriaLabel") }
+      />
     </div>
   );
 }
