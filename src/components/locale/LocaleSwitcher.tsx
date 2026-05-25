@@ -2,6 +2,7 @@
 
 import { Globe2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import ReactCountryFlag from "react-country-flag";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { routing } from "@/i18n/routing";
-import { Link, usePathname } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 
 const LOCALE_CONFIG = {
   nb: { countryCode: "NO", label: "NO" },
@@ -20,7 +21,12 @@ const LOCALE_CONFIG = {
 
 function LocaleSwitcher() {
   const pathname = usePathname();
+  const router = useRouter();
   const t = useTranslations("locale");
+
+  function switchLocale(locale: string) {
+    window.location.href = `/${locale}${pathname}`;
+  }
 
   return (
     <DropdownMenu>
@@ -30,31 +36,32 @@ function LocaleSwitcher() {
           size="icon"
           title={ t("changeLanguage") }
           aria-label={ t("changeLanguage") }
-          className="gap-1"
+          className="gap-1 w-full p-2"
         >
           <Globe2Icon className="size-4 sm:size-5" aria-hidden="true" />
-          <span>{t("changeLanguage")}</span>
+          <span>{ t("changeLanguage") }</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center">
         { routing.locales.map((locale) => {
           const { countryCode, label } = LOCALE_CONFIG[locale];
           return (
-            <DropdownMenuItem key={ locale } asChild>
-              <Link
-                href={ pathname }
-                locale={ locale }
-                className="flex cursor-pointer items-center gap-2"
-                title={ t("switchTo", { locale: t(locale) }) }
-              >
-                <ReactCountryFlag
-                  countryCode={ countryCode }
-                  svg
-                  style={{ width: "clamp(0.875rem, 2vw, 1.25rem)", height: "clamp(0.875rem, 2vw, 1.25rem)" }}
-                  aria-hidden="true"
-                />
-                { label }
-              </Link>
+            <DropdownMenuItem
+              key={ locale }
+              onSelect={ () => switchLocale(locale) }
+              className="flex cursor-pointer items-center gap-2"
+              title={ t("switchTo", { locale: t(locale) }) }
+            >
+              <ReactCountryFlag
+                countryCode={ countryCode }
+                svg
+                style={ {
+                  width: "clamp(0.875rem, 2vw, 1.25rem)",
+                  height: "clamp(0.875rem, 2vw, 1.25rem)",
+                } }
+                aria-hidden="true"
+              />
+              { label }
             </DropdownMenuItem>
           );
         }) }

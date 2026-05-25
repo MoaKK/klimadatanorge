@@ -28,7 +28,7 @@ async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations("ui");
 
   return (
-    <NextIntlClientProvider locale={ locale } messages={ messages }>
+    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
       <TooltipProvider>
         <SidebarProvider>
           <AppSidebar />
@@ -36,7 +36,7 @@ async function LocaleLayout({ children, params }: Props) {
             <Suspense name="map" fallback={ <MapSkeleton /> }>
               <MapClient />
             </Suspense>
-            <div className="absolute top-2 left-2 z-10">
+            <div className="absolute top-2 left-2 z-30">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <SidebarTrigger variant="secondary" aria-label={t("toggleSidebar")} />
