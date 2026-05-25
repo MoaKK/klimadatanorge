@@ -16,8 +16,9 @@
   },
   "modes": {
     "co2": {
-      "title": "CO\u2082-utslipp",
-      "description": "Årlige CO\u2082-utslipp for Norge"
+      "title": "CO₂-utslipp",
+      "description": "Årlige CO₂-utslipp for Norge",
+      "sliderHelp": "Dra i glidebryteren for å utforske Norges CO₂-utslipp år for år. Mørkere farge betyr høyere utslipp."
     },
     "temperature": {
       "title": "Temperaturavvik",
