@@ -73,6 +73,7 @@ function PrecipitationLayer({ data, year }: Props) {
   useEffect(() => {
     if (!map || !layersReady) return;
     const yearIndex = data.years.indexOf(year);
+    if (yearIndex === -1) return;
     try {
       (map.getSource(SOURCE_ID) as GeoJSONSource)?.setData(buildFC(data, yearIndex, colorScale));
       const mean = getNorwayMean(data, yearIndex);

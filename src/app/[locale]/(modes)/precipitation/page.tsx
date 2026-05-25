@@ -6,6 +6,7 @@ async function PrecipitationPage() {
     `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/data/precipitation-norway.json`,
     { next: { revalidate: 86400 } }
   );
+  if (!res.ok) throw new Error(`Failed to fetch precipitation data: ${res.status}`);
   const data: PrecipitationData = await res.json();
 
   return <PrecipitationMode data={data} />;
