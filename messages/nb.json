@@ -24,7 +24,10 @@
     },
     "temperature": {
       "title": "Temperaturavvik",
-      "description": "Overflatetemperaturavvik relativt til referanseperioden 1951-1980"
+      "description": "Overflatetemperaturavvik relativt til 1951\u20131980-gjennomsnittet",
+      "sliderHelp": "Dra glidebryteren for \u00e5 utforske Norges temperaturavvik \u00e5r for \u00e5r. R\u00f8dt betyr varmere enn normalt, bl\u00e5tt betyr kaldere.",
+      "sliderAriaLabel": "Velg \u00e5r for temperaturavviksdata",
+      "chartAriaLabel": "Linjediagram over Norges gjennomsnittlige temperaturavvik over tid"
     },
     "sealevel": {
       "title": "Havnivåstigning",
