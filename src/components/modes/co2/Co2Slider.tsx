@@ -21,7 +21,7 @@ function Co2Slider({ year, min, max, onChange }: Props) {
       </ModeHelp>
       <div className="mb-3 flex items-center justify-between">
         <span className="text-xs text-muted-foreground sm:text-sm">{ min }</span>
-        <span className="text-base font-semibold sm:text-xl">{ year }</span>
+        <span aria-live="polite" aria-atomic="true" className="text-base font-semibold sm:text-xl">{ year }</span>
         <span className="text-xs text-muted-foreground sm:text-sm">{ max }</span>
       </div>
       <div className="relative">
@@ -32,6 +32,7 @@ function Co2Slider({ year, min, max, onChange }: Props) {
           value={ [year] }
           onValueChange={ ([val]) => onChange(val) }
           className="cursor-pointer"
+          aria-label={ t("sliderAriaLabel") }
         />
       </div>
     </div>
