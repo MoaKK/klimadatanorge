@@ -1,6 +1,6 @@
-# Klimakart
+# Klima Data Norge
 
-Klimakart visualises climate data for Norway on an interactive map.
+Klima Data Norge visualises climate data for Norway on an interactive maps.
 
 ## Modes
 
