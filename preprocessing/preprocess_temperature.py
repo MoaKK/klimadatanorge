@@ -25,14 +25,17 @@ years = annual.year.values.tolist()
 lats = annual.lat.values.tolist()
 lons = annual.lon.values.tolist()
 
+half_lat = (lats[1] - lats[0]) / 2
+half_lon = (lons[1] - lons[0]) / 2
+
 cells = []
-for lat in lats:
-    for lon in lons:
-        cell_box = box(lon - 1, lat - 1, lon + 1, lat + 1)
+for i, lat in enumerate(lats):
+    for j, lon in enumerate(lons):
+        cell_box = box(lon - half_lon, lat - half_lat, lon + half_lon, lat + half_lat)
         clipped = norway_shape.intersection(cell_box)
         if clipped.is_empty or clipped.geom_type not in ("Polygon", "MultiPolygon"):
             continue
-        cell_data = annual.sel(lat=lat, lon=lon).values
+        cell_data = annual.isel(lat=i, lon=j).values
         anomalies = [
             round(float(v), 2) if not np.isnan(v) else None
             for v in cell_data
