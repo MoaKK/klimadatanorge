@@ -35,10 +35,10 @@ function LocaleSwitcher() {
           size="icon"
           title={ t("changeLanguage") }
           aria-label={ t("changeLanguage") }
-          className="gap-1 w-full p-2"
+          className="gap-1 w-full p-2 group-data-[collapsible=icon]:w-8 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:mx-auto"
         >
-          <Globe2Icon className="size-4 sm:size-5" aria-hidden="true" />
-          <span>{ t("changeLanguage") }</span>
+          <Globe2Icon className="size-4 sm:size-5 shrink-0" aria-hidden="true" />
+          <span className="group-data-[collapsible=icon]:hidden">{ t("changeLanguage") }</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center">

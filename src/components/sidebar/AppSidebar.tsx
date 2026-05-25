@@ -35,10 +35,12 @@ function AppSidebar() {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild tooltip="Klimakart">
+            <SidebarMenuButton size="lg" asChild tooltip={ tNav("appName") }>
               <Link href="/">
                 <Map className="size-4 shrink-0 ml-2 sm:size-5" />
-                <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden sm:text-base">Klimakart</span>
+                <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden sm:text-base">
+                  { tNav("appName") }
+                </span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -46,23 +48,23 @@ function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>{tNav("modes")}</SidebarGroupLabel>
+          <SidebarGroupLabel>{ tNav("modes") }</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-2">
-              {modes.map(({ key, href, icon: Icon, title }) => (
-                <SidebarMenuItem key={key}>
+              { modes.map(({ key, href, icon: Icon, title }) => (
+                <SidebarMenuItem key={ key }>
                   <SidebarMenuButton
                     asChild
-                    isActive={pathname.startsWith(href)}
-                    tooltip={title}
+                    isActive={ pathname.startsWith(href) }
+                    tooltip={ title }
                   >
-                    <Link href={href}>
+                    <Link href={ href }>
                       <Icon className="size-[clamp(1rem,2vw,1.25rem)]" />
-                      <span>{title}</span>
+                      <span>{ title }</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
+              )) }
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
