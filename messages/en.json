@@ -42,6 +42,13 @@
         "medium": "Medium",
         "high": "High"
       }
+    },
+    "precipitation": {
+      "title": "Precipitation",
+      "description": "Historical annual precipitation totals for Norway (ERA5, 1940-2024)",
+      "sliderHelp": "Drag the slider to explore annual precipitation totals across Norway year by year. Darker blue means more rainfall.\n\nData covers 1940 to 2024 from the ERA5 reanalysis dataset. Values show average mm per year across grid cells clipped to Norway.",
+      "sliderAriaLabel": "Select year for precipitation data",
+      "chartAriaLabel": "Line chart of Norway average annual precipitation over time"
     }
   },
   "ui": {

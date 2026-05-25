@@ -42,6 +42,13 @@
         "medium": "Middels",
         "high": "Høy"
       }
+    },
+    "precipitation": {
+      "title": "Nedbør",
+      "description": "Historiske årlige nedbørtotaler for Norge (ERA5, 1940-2024)",
+      "sliderHelp": "Dra glidebryteren for å utforske årlige nedbørtotaler i Norge år for år. Mørkere blå betyr mer nedbør.\n\nData dekker 1940 til 2024 fra ERA5-reanalysedatasettet. Verdiene viser gjennomsnittlig mm per år over rutenettceller klippet til Norge.",
+      "sliderAriaLabel": "Velg år for nedbørdata",
+      "chartAriaLabel": "Linjediagram over Norges gjennomsnittlige årlige nedbør over tid"
     }
   },
   "ui": {

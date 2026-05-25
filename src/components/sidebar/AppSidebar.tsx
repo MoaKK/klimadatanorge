@@ -28,6 +28,7 @@ function AppSidebar() {
     { ...MODES[0], title: tModes("co2.title") },
     { ...MODES[1], title: tModes("temperature.title") },
     { ...MODES[2], title: tModes("sealevel.title") },
+    { ...MODES[3], title: tModes("precipitation.title") },
   ];
 
   return (
