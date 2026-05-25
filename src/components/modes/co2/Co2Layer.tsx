@@ -70,7 +70,7 @@ function Co2Layer({ data, year }: Props) {
       source: LABEL_SOURCE_ID,
       layout: {
         "text-field": ["get", "label"],
-        "text-size": 14,
+        "text-size": 30,
         "text-anchor": "bottom",
       },
       paint: {
