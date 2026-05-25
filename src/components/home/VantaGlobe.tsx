@@ -35,7 +35,7 @@ function VantaGlobe() {
     };
   }, []);
 
-  return <div ref={el} className="absolute inset-0" />;
+  return <div ref={el} className="absolute inset-0 w-screen" />;
 }
 
 export { VantaGlobe };

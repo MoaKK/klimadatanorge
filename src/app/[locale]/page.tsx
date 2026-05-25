@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { VantaGlobeClient } from "@/components/home/VantaGlobeClient";
+import { AboutPanel } from "@/components/home/AboutPanel";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -17,7 +18,12 @@ async function Page({ params }: Props) {
 
   setRequestLocale(locale);
 
-  return <VantaGlobeClient />;
+  return (
+    <>
+      <VantaGlobeClient />
+      <AboutPanel />
+    </>
+  );
 }
 
 export default Page;
