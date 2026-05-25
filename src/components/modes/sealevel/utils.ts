@@ -15,7 +15,6 @@ let _protocolRegistered = false;
 
 export function ensureProtocol() {
   if (_protocolRegistered) return;
-  _protocolRegistered = true;
 
   maplibregl.addProtocol(PROTOCOL, async (params) => {
     const vMatch = params.url.match(/[?&]v=([^&]+)/);
@@ -30,11 +29,11 @@ export function ensureProtocol() {
 
     const blob = await res.blob();
     const bitmap = await createImageBitmap(blob);
-    const canvas = new OffscreenCanvas(256, 256);
+    const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
     const ctx = canvas.getContext("2d")!;
     ctx.drawImage(bitmap, 0, 0);
 
-    const imageData = ctx.getImageData(0, 0, 256, 256);
+    const imageData = ctx.getImageData(0, 0, bitmap.width, bitmap.height);
     const { data } = imageData;
 
     for (let i = 0; i < data.length; i += 4) {
@@ -51,6 +50,7 @@ export function ensureProtocol() {
     const outBlob = await canvas.convertToBlob();
     return { data: await outBlob.arrayBuffer() };
   });
+  _protocolRegistered = true;
 }
 
 export function tileTemplate(threshold: number) {
