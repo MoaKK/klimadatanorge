@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
+import { useTranslations } from "next-intl";
 import type { Co2Record } from "@/types/co2";
 
 const MARGIN = { top: 12, right: 12, bottom: 24, left: 44 };
@@ -17,6 +18,7 @@ type Props = {
 
 function Co2Chart({ data, year }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const t = useTranslations("modes.co2");
 
   useEffect(() => {
     if (!svgRef.current) return;
@@ -103,7 +105,13 @@ function Co2Chart({ data, year }: Props) {
 
   return (
     <div className="absolute right-4 top-5 z-10 rounded-xl bg-background/80 p-3 backdrop-blur-sm">
-      <svg ref={svgRef} width={WIDTH} height={HEIGHT} />
+      <svg
+        ref={svgRef}
+        width={WIDTH}
+        height={HEIGHT}
+        role="img"
+        aria-label={t("chartAriaLabel")}
+      />
     </div>
   );
 }
