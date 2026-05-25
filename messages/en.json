@@ -11,6 +11,7 @@
     "back": "Go home"
   },
   "nav": {
+    "appName": "Climate map",
     "modes": "Map modes",
     "about": "About"
   },
@@ -31,7 +32,16 @@
     },
     "sealevel": {
       "title": "Sea Level Rise",
-      "description": "Projected coastal flood risk scenarios for Norway"
+      "description": "Projected global sea level rise by emissions scenario (IPCC AR6)",
+      "sliderHelp": "Drag the slider to explore projected global sea level rise every 10 year (2020-2100), including Norway and coastlines worldwide. The blue overlay shows land areas that would fall below the rising sea level.\n\nZoom in for more detail along coastlines. Switch between emissions scenarios to compare outcomes.\n\nProjections are global median estimates (IPCC AR6). Local sea level may vary and coastal elevation accuracy is limited, so treat this as an approximation.",
+      "sliderAriaLabel": "Select year for sea level projection",
+      "scenarioLabel": "Emissions scenario",
+      "chartAriaLabel": "Line chart of projected global sea level rise by scenario",
+      "scenario": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
     }
   },
   "ui": {

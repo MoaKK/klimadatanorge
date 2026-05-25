@@ -36,7 +36,7 @@ function ModeHelp({ children, className }: Props) {
           </span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent side="top" align="start" className="w-64 text-sm">
+      <PopoverContent side="top" align="start" className="w-64 text-sm whitespace-pre-line">
         {children}
       </PopoverContent>
     </Popover>
