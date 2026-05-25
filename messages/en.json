@@ -24,7 +24,10 @@
     },
     "temperature": {
       "title": "Temperature Anomaly",
-      "description": "Surface temperature anomaly relative to 1951-1980 baseline"
+      "description": "Surface temperature anomaly relative to 1951\u20131980 baseline",
+      "sliderHelp": "Drag the slider to explore Norway\u2019s surface temperature anomaly year by year. Red means warmer than average, blue means cooler.",
+      "sliderAriaLabel": "Select year for temperature anomaly data",
+      "chartAriaLabel": "Line chart of Norway\u2019s average temperature anomaly over time"
     },
     "sealevel": {
       "title": "Sea Level Rise",

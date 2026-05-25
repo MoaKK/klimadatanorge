@@ -4,29 +4,62 @@ import { useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 import type { GeoJSONSource } from "maplibre-gl";
 import { useMapStore } from "@/store/mapStore";
-import type { Co2Record } from "@/types/co2";
+import type { TemperatureData } from "@/types/temperature";
 
-const SOURCE_ID = "norway-co2";
-const FILL_ID = "norway-co2-fill";
-const OUTLINE_ID = "norway-co2-outline";
-const LABEL_SOURCE_ID = "norway-co2-label";
-const LABEL_ID = "norway-co2-label-text";
+const SOURCE_ID = "temperature-grid";
+const FILL_ID = "temperature-grid-fill";
+const OUTLINE_ID = "temperature-grid-outline";
+const LABEL_SOURCE_ID = "temperature-label";
+const LABEL_ID = "temperature-label-text";
 const LABEL_LNGLAT: [number, number] = [10, 63];
 
+const EMPTY_FC = { type: "FeatureCollection" as const, features: [] as never[] };
+
 type Props = {
-  data: Co2Record[];
+  data: TemperatureData;
   year: number;
 };
 
-function Co2Layer({ data, year }: Props) {
+function buildFC(
+  data: TemperatureData,
+  yearIndex: number,
+  colorScale: (v: number) => string
+) {
+  return {
+    type: "FeatureCollection" as const,
+    features: data.cells.map((cell) => {
+      const anomaly = yearIndex >= 0 ? cell.data[yearIndex] : null;
+      return {
+        type: "Feature" as const,
+        geometry: cell.geometry,
+        properties: {
+          color: anomaly !== null ? colorScale(anomaly) : "rgba(128,128,128,0.3)",
+        },
+      };
+    }),
+  };
+}
+
+function getNorwayMean(data: TemperatureData, yearIndex: number): number | null {
+  if (yearIndex < 0) return null;
+  const values = data.cells
+    .map((c) => c.data[yearIndex])
+    .filter((v): v is number => v !== null);
+  return values.length > 0 ? (d3.mean(values) ?? null) : null;
+}
+
+function TemperatureLayer({ data, year }: Props) {
   const map = useMapStore((s) => s.map);
   const layersReady = useRef(false);
 
   const colorScale = useMemo(() => {
-    const values = data.map((r) => r.co2).filter((v) => v > 0);
+    const allValues = data.cells.flatMap((c) =>
+      c.data.filter((v): v is number => v !== null)
+    );
+    const maxAbs = d3.max(allValues.map(Math.abs)) ?? 3;
     return d3
-      .scaleSequential(d3.interpolateYlOrRd)
-      .domain([d3.min(values) ?? 0, d3.max(values) ?? 100]);
+      .scaleDiverging((t) => d3.interpolateRdBu(1 - t))
+      .domain([-maxAbs, 0, maxAbs]);
   }, [data]);
 
   useEffect(() => {
@@ -34,27 +67,22 @@ function Co2Layer({ data, year }: Props) {
 
     try {
       if (!map.getSource(SOURCE_ID)) {
-        map.addSource(SOURCE_ID, {
-          type: "geojson",
-          data: "/data/norway.json",
-        });
+        map.addSource(SOURCE_ID, { type: "geojson", data: EMPTY_FC });
       }
-
       if (!map.getLayer(FILL_ID)) {
         map.addLayer({
           id: FILL_ID,
           type: "fill",
           source: SOURCE_ID,
-          paint: { "fill-color": "#ccc", "fill-opacity": 0.7 },
+          paint: { "fill-color": ["get", "color"], "fill-opacity": 0.7 },
         });
       }
-
       if (!map.getLayer(OUTLINE_ID)) {
         map.addLayer({
           id: OUTLINE_ID,
           type: "line",
           source: SOURCE_ID,
-          paint: { "line-color": "#fff", "line-width": 1 },
+          paint: { "line-color": "rgba(255,255,255,0.1)", "line-width": 0.5 },
         });
       }
 
@@ -73,7 +101,6 @@ function Co2Layer({ data, year }: Props) {
           },
         });
       }
-
       if (!map.getLayer(LABEL_ID)) {
         map.addLayer({
           id: LABEL_ID,
@@ -106,7 +133,7 @@ function Co2Layer({ data, year }: Props) {
         if (map.getLayer(FILL_ID)) map.removeLayer(FILL_ID);
         if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
       } catch {
-        // map was destroyed before cleanup could run
+        // map was destroyed before cleanup
       }
     };
   }, [map]);
@@ -114,25 +141,28 @@ function Co2Layer({ data, year }: Props) {
   useEffect(() => {
     if (!map || !layersReady.current) return;
 
-    const record = data.find((r) => r.year === year);
-    if (!record) return;
+    const yearIndex = data.years.indexOf(year);
 
     try {
-      map.setPaintProperty(
-        FILL_ID,
-        "fill-color",
-        record.co2 > 0 ? colorScale(record.co2) : "#ccc"
-      );
+      const gridSource = map.getSource(SOURCE_ID) as GeoJSONSource;
+      if (gridSource) {
+        gridSource.setData(buildFC(data, yearIndex, colorScale));
+      }
 
-      const source = map.getSource(LABEL_SOURCE_ID) as GeoJSONSource;
-      if (source) {
-        source.setData({
+      const mean = getNorwayMean(data, yearIndex);
+      const label = mean !== null
+        ? `${mean >= 0 ? "+" : ""}${mean.toFixed(2)}°C`
+        : "";
+
+      const labelSource = map.getSource(LABEL_SOURCE_ID) as GeoJSONSource;
+      if (labelSource) {
+        labelSource.setData({
           type: "FeatureCollection",
           features: [
             {
               type: "Feature",
               geometry: { type: "Point", coordinates: LABEL_LNGLAT },
-              properties: { label: `${record.co2.toFixed(1)} Mt CO₂` },
+              properties: { label },
             },
           ],
         });
@@ -145,4 +175,4 @@ function Co2Layer({ data, year }: Props) {
   return null;
 }
 
-export { Co2Layer };
+export { TemperatureLayer };
