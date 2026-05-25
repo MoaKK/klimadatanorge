@@ -67,7 +67,7 @@ function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="m-auto">
+      <SidebarFooter>
         <LocaleSwitcher />
       </SidebarFooter>
       <SidebarRail />

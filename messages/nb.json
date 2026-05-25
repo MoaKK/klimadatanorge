@@ -31,7 +31,16 @@
     },
     "sealevel": {
       "title": "Havnivåstigning",
-      "description": "Anslåtte scenarier for kystoversvømmelser i Norge"
+      "description": "Forventet global havnivåstigning etter utslippsscenario (IPCC AR6)",
+      "sliderHelp": "Dra glidebryteren for å utforske forventet global havnivåstigning år for år, inkludert Norge og kyster verden over. Det blå laget viser landområder som vil ligge under det stigende havnivået.\n\nZoom inn for mer detalj langs kysten. Bytt mellom utslippsscenarier for å sammenligne.\n\nProjeksjonene er globale medianestimater (IPCC AR6). Lokalt havnivå kan variere og høydedataene langs kysten har begrenset nøyaktighet, så dette er en tilnærming.",
+      "sliderAriaLabel": "Velg år for havnivåprojeksjon",
+      "scenarioLabel": "Utslippsscenario",
+      "chartAriaLabel": "Linjediagram over forventet global havnivåstigning etter scenario",
+      "scenario": {
+        "low": "Lav",
+        "medium": "Middels",
+        "high": "Høy"
+      }
     }
   },
   "ui": {
