@@ -2,7 +2,6 @@
 
 import { Globe2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import ReactCountryFlag from "react-country-flag";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { routing } from "@/i18n/routing";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 const LOCALE_CONFIG = {
   nb: { countryCode: "NO", label: "NO" },
@@ -24,8 +23,8 @@ function LocaleSwitcher() {
   const router = useRouter();
   const t = useTranslations("locale");
 
-  function switchLocale(locale: string) {
-    window.location.href = `/${locale}${pathname}`;
+  function switchLocale(locale: (typeof routing.locales)[number]) {
+    router.replace(pathname, { locale });
   }
 
   return (

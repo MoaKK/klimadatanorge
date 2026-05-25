@@ -23,6 +23,6 @@ If there is nothing worth commenting on, return an empty array: []
 
 Return ONLY valid JSON. No explanation, no markdown fences.`;
 
-export const IGNORED_FILES = /package-lock\.json|\.lock$|(^|\/)dist\//;
+export const IGNORED_FILES = /package-lock\.json|\.lock$|(^|\/)dist\/|src\/components\/ui\//;
 
 export const MODEL = "claude-sonnet-4-6";
