@@ -1,97 +1,57 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import * as d3 from "d3";
 import type { GeoJSONSource } from "maplibre-gl";
 import { useMapStore } from "@/store/mapStore";
 import type { Co2Record } from "@/types/co2";
+import {
+  SOURCE_ID, FILL_ID, OUTLINE_ID,
+  LABEL_SOURCE_ID, LABEL_ID, LABEL_LNGLAT,
+  buildColorScale,
+} from "./utils";
 
-const SOURCE_ID = "norway-co2";
-const FILL_ID = "norway-co2-fill";
-const OUTLINE_ID = "norway-co2-outline";
-const LABEL_SOURCE_ID = "norway-co2-label";
-const LABEL_ID = "norway-co2-label-text";
-const LABEL_LNGLAT: [number, number] = [10, 63];
-
-type Props = {
-  data: Co2Record[];
-  year: number;
-};
+type Props = { data: Co2Record[]; year: number };
 
 function Co2Layer({ data, year }: Props) {
   const map = useMapStore((s) => s.map);
   const layersReady = useRef(false);
-
-  const colorScale = useMemo(() => {
-    const values = data.map((r) => r.co2).filter((v) => v > 0);
-    return d3
-      .scaleSequential(d3.interpolateYlOrRd)
-      .domain([d3.min(values) ?? 0, d3.max(values) ?? 100]);
-  }, [data]);
+  const colorScale = useMemo(() => buildColorScale(data), [data]);
 
   useEffect(() => {
     if (!map) return;
 
     try {
       if (!map.getSource(SOURCE_ID)) {
-        map.addSource(SOURCE_ID, {
-          type: "geojson",
-          data: "/data/norway.json",
-        });
+        map.addSource(SOURCE_ID, { type: "geojson", data: "/data/norway.json" });
       }
-
       if (!map.getLayer(FILL_ID)) {
         map.addLayer({
-          id: FILL_ID,
-          type: "fill",
-          source: SOURCE_ID,
+          id: FILL_ID, type: "fill", source: SOURCE_ID,
           paint: { "fill-color": "#ccc", "fill-opacity": 0.7 },
         });
       }
-
       if (!map.getLayer(OUTLINE_ID)) {
         map.addLayer({
-          id: OUTLINE_ID,
-          type: "line",
-          source: SOURCE_ID,
+          id: OUTLINE_ID, type: "line", source: SOURCE_ID,
           paint: { "line-color": "#fff", "line-width": 1 },
         });
       }
-
       if (!map.getSource(LABEL_SOURCE_ID)) {
         map.addSource(LABEL_SOURCE_ID, {
           type: "geojson",
           data: {
             type: "FeatureCollection",
-            features: [
-              {
-                type: "Feature",
-                geometry: { type: "Point", coordinates: LABEL_LNGLAT },
-                properties: { label: "" },
-              },
-            ],
+            features: [{ type: "Feature", geometry: { type: "Point", coordinates: LABEL_LNGLAT }, properties: { label: "" } }],
           },
         });
       }
-
       if (!map.getLayer(LABEL_ID)) {
         map.addLayer({
-          id: LABEL_ID,
-          type: "symbol",
-          source: LABEL_SOURCE_ID,
-          layout: {
-            "text-field": ["get", "label"],
-            "text-size": 30,
-            "text-anchor": "bottom",
-          },
-          paint: {
-            "text-color": "#ffffff",
-            "text-halo-color": "rgba(0,0,0,0.6)",
-            "text-halo-width": 2,
-          },
+          id: LABEL_ID, type: "symbol", source: LABEL_SOURCE_ID,
+          layout: { "text-field": ["get", "label"], "text-size": 30, "text-anchor": "bottom" },
+          paint: { "text-color": "#ffffff", "text-halo-color": "rgba(0,0,0,0.6)", "text-halo-width": 2 },
         });
       }
-
       layersReady.current = true;
     } catch {
       return;
@@ -105,41 +65,21 @@ function Co2Layer({ data, year }: Props) {
         if (map.getLayer(OUTLINE_ID)) map.removeLayer(OUTLINE_ID);
         if (map.getLayer(FILL_ID)) map.removeLayer(FILL_ID);
         if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
-      } catch {
-        // map was destroyed before cleanup could run
-      }
+      } catch {}
     };
   }, [map]);
 
   useEffect(() => {
     if (!map || !layersReady.current) return;
-
     const record = data.find((r) => r.year === year);
     if (!record) return;
-
     try {
-      map.setPaintProperty(
-        FILL_ID,
-        "fill-color",
-        record.co2 > 0 ? colorScale(record.co2) : "#ccc"
-      );
-
-      const source = map.getSource(LABEL_SOURCE_ID) as GeoJSONSource;
-      if (source) {
-        source.setData({
-          type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              geometry: { type: "Point", coordinates: LABEL_LNGLAT },
-              properties: { label: `${record.co2.toFixed(1)} Mt CO₂` },
-            },
-          ],
-        });
-      }
-    } catch {
-      // map was destroyed mid-update
-    }
+      map.setPaintProperty(FILL_ID, "fill-color", record.co2 > 0 ? colorScale(record.co2) : "#ccc");
+      (map.getSource(LABEL_SOURCE_ID) as GeoJSONSource)?.setData({
+        type: "FeatureCollection",
+        features: [{ type: "Feature", geometry: { type: "Point", coordinates: LABEL_LNGLAT }, properties: { label: `${record.co2.toFixed(1)} Mt CO₂` } }],
+      });
+    } catch {}
   }, [map, year, data, colorScale]);
 
   return null;
