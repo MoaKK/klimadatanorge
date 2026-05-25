@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import type { GeoJSONSource } from "maplibre-gl";
+import { useEffect, useState } from "react";
+import type { GeoJSONSource, RasterTileSource } from "maplibre-gl";
 import { useMapStore } from "@/store/mapStore";
 import type { Scenario } from "@/types/sealevel";
 import {
@@ -15,17 +15,22 @@ function SeaLevelLayer({ year, scenario }: Props) {
   const map = useMapStore((s) => s.map);
   const [layersReady, setLayersReady] = useState(false);
 
-  const yearRef = useRef(year);
-  const scenarioRef = useRef(scenario);
-  yearRef.current = year;
-  scenarioRef.current = scenario;
-
   useEffect(() => {
     if (!map) return;
     setLayersReady(false);
     ensureProtocol();
 
-    const initThreshold = getThreshold(yearRef.current, scenarioRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const initThreshold = getThreshold(year, scenario);
+
+    const cleanup = () => {
+      try {
+        if (map.getLayer(LABEL_LAYER)) map.removeLayer(LABEL_LAYER);
+        if (map.getSource(LABEL_SOURCE)) map.removeSource(LABEL_SOURCE);
+        if (map.getLayer(FLOOD_LAYER)) map.removeLayer(FLOOD_LAYER);
+        if (map.getSource(TERRAIN_SOURCE)) map.removeSource(TERRAIN_SOURCE);
+      } catch { }
+    };
 
     try {
       map.addSource(TERRAIN_SOURCE, {
@@ -41,7 +46,6 @@ function SeaLevelLayer({ year, scenario }: Props) {
         source: TERRAIN_SOURCE,
         paint: { "raster-opacity": 1, "raster-fade-duration": 0 },
       });
-
       map.addSource(LABEL_SOURCE, {
         type: "geojson",
         data: labelData(Math.round(initThreshold * 1000)),
@@ -62,21 +66,19 @@ function SeaLevelLayer({ year, scenario }: Props) {
           "text-halo-width": 2,
         },
       });
-
       setLayersReady(true);
     } catch {
+      cleanup();
       return;
     }
 
     return () => {
       setLayersReady(false);
-      try {
-        if (map.getLayer(LABEL_LAYER)) map.removeLayer(LABEL_LAYER);
-        if (map.getSource(LABEL_SOURCE)) map.removeSource(LABEL_SOURCE);
-        if (map.getLayer(FLOOD_LAYER)) map.removeLayer(FLOOD_LAYER);
-        if (map.getSource(TERRAIN_SOURCE)) map.removeSource(TERRAIN_SOURCE);
-      } catch { }
+      cleanup();
     };
+  // year and scenario intentionally omitted: setup only runs when map changes,
+  // and the second effect handles all subsequent updates.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map]);
 
   useEffect(() => {
@@ -87,8 +89,7 @@ function SeaLevelLayer({ year, scenario }: Props) {
 
     try {
       (map.getSource(LABEL_SOURCE) as GeoJSONSource)?.setData(labelData(mm));
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (map.getSource(TERRAIN_SOURCE) as any)?.setTiles([tileTemplate(threshold)]);
+      (map.getSource(TERRAIN_SOURCE) as RasterTileSource)?.setTiles([tileTemplate(threshold)]);
     } catch { }
   }, [map, year, scenario, layersReady]);
 

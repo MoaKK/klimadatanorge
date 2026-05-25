@@ -15,11 +15,14 @@ let _protocolRegistered = false;
 
 export function ensureProtocol() {
   if (_protocolRegistered) return;
+  if (typeof OffscreenCanvas === "undefined") return;
 
   maplibregl.addProtocol(PROTOCOL, async (params) => {
     const vMatch = params.url.match(/[?&]v=([^&]+)/);
     const threshold = vMatch ? parseFloat(vMatch[1]) : 0;
 
+    // MapLibre substitutes {z}/{x}/{y} before invoking the protocol handler,
+    // so params.url contains real tile coordinates, not template placeholders.
     const tileUrl = params.url
       .replace(`${PROTOCOL}://`, "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/")
       .replace(/\?.*$/, "");
@@ -39,7 +42,9 @@ export function ensureProtocol() {
     for (let i = 0; i < data.length; i += 4) {
       const r = data[i], g = data[i + 1], b = data[i + 2];
       const elevation = r * 256 + g + b / 256 - 32768;
-      if (elevation >= 0.005 && elevation < threshold) {
+      // elevation < 0: naturally below sea level (Death Valley, polders, etc.)
+      // 0.005 lower bound for positive elevations excludes ocean pixels encoded as exactly 0m
+      if ((elevation < 0 || elevation >= 0.005) && elevation < threshold) {
         data[i] = 20; data[i + 1] = 100; data[i + 2] = 255; data[i + 3] = 165;
       } else {
         data[i] = 0; data[i + 1] = 0; data[i + 2] = 0; data[i + 3] = 0;

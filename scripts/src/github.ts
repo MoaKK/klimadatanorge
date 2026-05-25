@@ -5,10 +5,11 @@ import type { DiffFile, ReviewComment } from "./types.js";
 export const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 const repoName = process.env.REPO_NAME ?? "";
-if (!repoName.includes("/")) {
+const repoParts = repoName.split("/");
+if (repoParts.length !== 2 || !repoParts[0] || !repoParts[1]) {
   throw new Error(`REPO_NAME must be in "owner/repo" format, got: "${repoName}"`);
 }
-export const [owner, repo] = repoName.split("/");
+export const [owner, repo] = repoParts;
 export const prNumber = parseInt(process.env.PR_NUMBER ?? "0", 10);
 export const commitSha = process.env.COMMIT_SHA ?? "";
 const beforeSha = process.env.BEFORE_SHA ?? "";
@@ -24,7 +25,7 @@ export function parseValidLines(patch: string): Set<number> {
       continue;
     }
     if (line.startsWith("-")) continue;
-    valid.add(currentLine);
+    if (line.startsWith("+")) valid.add(currentLine);
     currentLine++;
   }
   return valid;
@@ -75,7 +76,7 @@ export async function getExistingBotCommentKeys(): Promise<Set<string>> {
   return new Set(
     comments
       .filter((c) => c.user?.login === "github-actions[bot]" && c.line != null)
-      .map((c) => `${c.path}:${c.line}`)
+      .map((c) => `${c.path}:${c.line}:${c.body}`)
   );
 }
 

@@ -20,7 +20,7 @@ async function main() {
 
   const existingKeys = await getExistingBotCommentKeys();
   const newComments = allComments.filter(
-    (c) => !existingKeys.has(`${c.path}:${c.line}`)
+    (c) => !existingKeys.has(`${c.path}:${c.line}:${c.body}`)
   );
 
   if (existingKeys.size > 0) {

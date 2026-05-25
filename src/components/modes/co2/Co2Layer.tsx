@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { GeoJSONSource } from "maplibre-gl";
 import { useMapStore } from "@/store/mapStore";
 import type { Co2Record } from "@/types/co2";
@@ -14,7 +14,7 @@ type Props = { data: Co2Record[]; year: number };
 
 function Co2Layer({ data, year }: Props) {
   const map = useMapStore((s) => s.map);
-  const layersReady = useRef(false);
+  const [layersReady, setLayersReady] = useState(false);
   const colorScale = useMemo(() => buildColorScale(data), [data]);
 
   useEffect(() => {
@@ -52,25 +52,25 @@ function Co2Layer({ data, year }: Props) {
           paint: { "text-color": "#ffffff", "text-halo-color": "rgba(0,0,0,0.6)", "text-halo-width": 2 },
         });
       }
-      layersReady.current = true;
+      setLayersReady(true);
     } catch {
       return;
     }
 
     return () => {
-      layersReady.current = false;
+      setLayersReady(false);
       try {
         if (map.getLayer(LABEL_ID)) map.removeLayer(LABEL_ID);
         if (map.getSource(LABEL_SOURCE_ID)) map.removeSource(LABEL_SOURCE_ID);
         if (map.getLayer(OUTLINE_ID)) map.removeLayer(OUTLINE_ID);
         if (map.getLayer(FILL_ID)) map.removeLayer(FILL_ID);
         if (map.getSource(SOURCE_ID)) map.removeSource(SOURCE_ID);
-      } catch {}
+      } catch (err) { console.error("Co2Layer cleanup error:", err); }
     };
   }, [map]);
 
   useEffect(() => {
-    if (!map || !layersReady.current) return;
+    if (!map || !layersReady) return;
     const record = data.find((r) => r.year === year);
     if (!record) return;
     try {
@@ -80,7 +80,7 @@ function Co2Layer({ data, year }: Props) {
         features: [{ type: "Feature", geometry: { type: "Point", coordinates: LABEL_LNGLAT }, properties: { label: `${record.co2.toFixed(1)} Mt CO₂` } }],
       });
     } catch {}
-  }, [map, year, data, colorScale]);
+  }, [map, year, data, colorScale, layersReady]);
 
   return null;
 }

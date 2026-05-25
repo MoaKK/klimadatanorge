@@ -25,8 +25,10 @@ years = annual.year.values.tolist()
 lats = annual.lat.values.tolist()
 lons = annual.lon.values.tolist()
 
-half_lat = (lats[1] - lats[0]) / 2
-half_lon = (lons[1] - lons[0]) / 2
+if len(lats) < 2 or len(lons) < 2:
+    raise ValueError(f"Need at least 2 lat and lon values after slicing, got {len(lats)} lats, {len(lons)} lons")
+half_lat = abs(lats[1] - lats[0]) / 2
+half_lon = abs(lons[1] - lons[0]) / 2
 
 cells = []
 for i, lat in enumerate(lats):
