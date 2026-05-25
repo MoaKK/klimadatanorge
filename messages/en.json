@@ -1,0 +1,61 @@
+{
+  "locale": {
+    "nb": "Norwegian",
+    "en": "English",
+    "switchTo": "Switch to {locale}",
+    "changeLanguage": "Change language"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "back": "Go home"
+  },
+  "nav": {
+    "appName": "Climate map",
+    "modes": "Map modes",
+    "about": "About"
+  },
+  "modes": {
+    "co2": {
+      "title": "CO\u2082 Emissions",
+      "description": "Annual CO\u2082 emissions for Norway",
+      "sliderHelp": "Drag the slider to explore Norway\u2019s CO\u2082 emissions year by year. Darker shades mean higher emissions.",
+      "sliderAriaLabel": "Select year for CO\u2082 emissions data",
+      "chartAriaLabel": "Line chart of Norway\u2019s CO\u2082 emissions over time"
+    },
+    "temperature": {
+      "title": "Temperature Anomaly",
+      "description": "Surface temperature anomaly relative to 1951\u20131980 baseline",
+      "sliderHelp": "Drag the slider to explore Norway\u2019s surface temperature anomaly year by year. Red means warmer than average, blue means cooler.",
+      "sliderAriaLabel": "Select year for temperature anomaly data",
+      "chartAriaLabel": "Line chart of Norway\u2019s average temperature anomaly over time"
+    },
+    "sealevel": {
+      "title": "Sea Level Rise",
+      "description": "Projected global sea level rise by emissions scenario (IPCC AR6)",
+      "sliderHelp": "Drag the slider to explore projected global sea level rise every 10 year (2020-2100), including Norway and coastlines worldwide. The blue overlay shows land areas that would fall below the rising sea level.\n\nZoom in for more detail along coastlines. Switch between emissions scenarios to compare outcomes.\n\nProjections are global median estimates (IPCC AR6). Local sea level may vary and coastal elevation accuracy is limited, so treat this as an approximation.",
+      "sliderAriaLabel": "Select year for sea level projection",
+      "scenarioLabel": "Emissions scenario",
+      "chartAriaLabel": "Line chart of projected global sea level rise by scenario",
+      "scenario": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    }
+  },
+  "ui": {
+    "loading": "Loading map...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "refresh": "Refresh page",
+    "toggleSidebar": "Toggle sidebar",
+    "help": "Help"
+  },
+  "errors": {
+    "network": "Network error. Check your connection and try again.",
+    "dataLoad": "Failed to load climate data.",
+    "mapLoad": "Failed to load the map.",
+    "unknown": "An unexpected error occurred."
+  }
+}

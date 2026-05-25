@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#ai-code-reviewer
+scripts/node_modules/
+
+#python
+.venv/
+
+# Raw climate data source files (large, preprocessed output committed instead)
+public/data/*.nc
+public/data/*.nc.gz
