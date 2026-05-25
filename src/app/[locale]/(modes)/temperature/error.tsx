@@ -7,8 +7,8 @@ type Props = {
   reset: () => void;
 };
 
-function ErrorPage({ reset }: Props) {
+function Error({ reset }: Props) {
   return <ErrorState reset={reset} />;
 }
 
-export default ErrorPage;
+export default Error;

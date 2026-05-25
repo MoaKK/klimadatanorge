@@ -6,12 +6,10 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { routing } from "@/i18n/routing";
 import { AppSidebar } from "@/components/sidebar/AppSidebar";
-import { MapClient } from "@/components/map/MapClient";
-import { Suspense } from "react";
-import { MapSkeleton } from "@/components/map/MapSkeleton";
+import { ReactNode } from "react";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   params: Promise<{ locale: string }>;
 };
 
@@ -33,9 +31,6 @@ async function LocaleLayout({ children, params }: Props) {
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset className="relative overflow-hidden">
-            <Suspense name="map" fallback={ <MapSkeleton /> }>
-              <MapClient />
-            </Suspense>
             <div className="absolute top-2 left-2 z-30">
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -44,7 +39,7 @@ async function LocaleLayout({ children, params }: Props) {
                 <TooltipContent side="right">{t("toggleSidebar")}</TooltipContent>
               </Tooltip>
             </div>
-            { children }
+            {children}
           </SidebarInset>
         </SidebarProvider>
       </TooltipProvider>

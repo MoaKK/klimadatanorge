@@ -59,6 +59,7 @@ function Co2Layer({ data, year }: Props) {
 
     return () => {
       setLayersReady(false);
+      if (!map.loaded()) return;
       try {
         if (map.getLayer(LABEL_ID)) map.removeLayer(LABEL_ID);
         if (map.getSource(LABEL_SOURCE_ID)) map.removeSource(LABEL_SOURCE_ID);
@@ -79,7 +80,7 @@ function Co2Layer({ data, year }: Props) {
         type: "FeatureCollection",
         features: [{ type: "Feature", geometry: { type: "Point", coordinates: LABEL_LNGLAT }, properties: { label: `${record.co2.toFixed(1)} Mt CO₂` } }],
       });
-    } catch {}
+    } catch { }
   }, [map, year, data, colorScale, layersReady]);
 
   return null;

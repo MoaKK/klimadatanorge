@@ -3,6 +3,7 @@
 import { ErrorState } from "@/components/error/ErrorState";
 
 type Props = {
+  error: Error & { digest?: string };
   reset: () => void;
 };
 
