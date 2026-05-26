@@ -60,7 +60,7 @@ function AppSidebar() {
   return (
     <Sidebar variant="inset" collapsible="icon">
       <SidebarHeader>
-        <SidebarMenu>
+        <SidebarMenu className="">
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip={ tNav("appName") }>
               <Link href="/">
@@ -69,6 +69,22 @@ function AppSidebar() {
                   { tNav("appName") }
                 </span>
               </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="" asChild tooltip="Github repo">
+              <a
+                href="https://github.com/MoaKK/klimadatanorge"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="/github-icon.svg"
+                  className="size-4 shrink-0 invert"
+                  aria-hidden="true"
+                />
+                <span>Github</span>
+              </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
