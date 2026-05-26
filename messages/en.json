@@ -1,7 +1,7 @@
 {
   "home": {
     "aboutTitle": "About this website",
-    "aboutBody1": "This website shows five climate indicators for Norway: CO₂ emissions, surface temperature anomaly, projected sea level rise, historical precipitation, and glacier retreat. All data comes from open scientific sources.",
+    "aboutBody1": "This website shows six climate indicators for Norway: CO₂ emissions, surface temperature anomaly, projected sea level rise, historical precipitation, glacier retreat, and current air quality. All data comes from open scientific sources.",
     "aboutBody2": "The numbers are best understood as approximations. Temperature and precipitation come from reanalysis models (NASA GISS and ERA5), which blend observations with atmospheric modelling rather than reading directly from sensors. Sea level projections follow IPCC AR6 global medians and do not account for local land movement or regional ocean variation. CO₂ figures are national totals. Glacier outlines are survey snapshots, not continuous measurements, and coverage varies between periods.",
     "aboutBody3": "This is a portfolio project, not a scientific tool. For authoritative climate data, consult the Norwegian Environment Agency or the Norwegian Meteorological Institute.",
     "dataSourcesTitle": "Data sources",
@@ -9,7 +9,8 @@
     "dataSourcesTemperature": "Temperature: NASA GISS",
     "dataSourcesSealevel": "Sea level: IPCC AR6",
     "dataSourcesPrecipitation": "Precipitation: ERA5 / Copernicus",
-    "dataSourcesGlacier": "Glaciers: NVE Norwegian Glacier Inventory"
+    "dataSourcesGlacier": "Glaciers: NVE Norwegian Glacier Inventory",
+    "dataSourcesAirquality": "Air quality: Norwegian Meteorological Institute (met.no)"
   },
   "locale": {
     "nb": "Norwegian",
@@ -25,7 +26,9 @@
   "nav": {
     "appName": "Climate Data Norway",
     "modes": "Map modes",
-    "about": "About"
+    "about": "About",
+    "historicalMaps": "Historical maps",
+    "liveMaps": "Live maps"
   },
   "modes": {
     "co2": {
@@ -70,6 +73,21 @@
       "chartTitle": "Total mapped area (km²)",
       "chartAriaLabel": "Bar chart of total mapped glacier area per survey period",
       "unnamedGlacier": "Unnamed glacier"
+    },
+    "airquality": {
+      "title": "Air Quality",
+      "description": "Current air quality forecast for Norwegian monitoring stations (met.no)",
+      "help": "This map shows air quality monitoring stations across Norway. Data comes from the Norwegian Meteorological Institute's forecast model, updated daily.\n\nClick any station (purple dot) to see the current Air Quality Index and pollutant concentrations: NO₂, PM2.5, PM10, and ozone (O₃).\n\nAQI scale: Low (1-2), Moderate (2-3), High (3-4), Very high (4+).",
+      "clickHint": "Click a station to view air quality",
+      "aqiLabel": "AQI",
+      "aqiLow": "Low",
+      "aqiModerate": "Moderate",
+      "aqiHigh": "High",
+      "aqiVeryHigh": "Very high",
+      "close": "Close",
+      "loading": "Loading...",
+      "error": "Failed to load data",
+      "updatedLabel": "Model run"
     }
   },
   "ui": {
