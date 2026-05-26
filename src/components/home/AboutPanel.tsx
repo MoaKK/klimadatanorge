@@ -15,24 +15,25 @@ function AboutPanel() {
         <Collapsible className="w-full">
           <CollapsibleTrigger asChild>
             <Button variant="ghost" className="group h-auto w-full justify-between rounded-none px-3 py-2.5">
-              <ItemTitle>{t("aboutTitle")}</ItemTitle>
+              <ItemTitle>{ t("aboutTitle") }</ItemTitle>
               <ChevronDown className="size-4 shrink-0 transition-transform group-data-[state=open]:rotate-180" />
             </Button>
           </CollapsibleTrigger>
           <CollapsibleContent className="max-h-[50vh] sm:max-h-96 lg:max-h-130 overflow-auto">
             <ItemSeparator className="my-0" />
             <div className="flex flex-col gap-3 p-3">
-              <ItemDescription className="line-clamp-none">{t("aboutBody1")}</ItemDescription>
-              <ItemDescription className="line-clamp-none">{t("aboutBody2")}</ItemDescription>
-              <ItemDescription className="line-clamp-none">{t("aboutBody3")}</ItemDescription>
+              <ItemDescription className="line-clamp-none">{ t("aboutBody1") }</ItemDescription>
+              <ItemDescription className="line-clamp-none">{ t("aboutBody2") }</ItemDescription>
+              <ItemDescription className="line-clamp-none">{ t("aboutBody3") }</ItemDescription>
               <div className="flex flex-col gap-1">
-                <ItemTitle className="text-xs">{t("dataSourcesTitle")}</ItemTitle>
+                <ItemTitle className="text-xs">{ t("dataSourcesTitle") }</ItemTitle>
                 <div className="flex flex-col gap-0.5">
-                  <ItemDescription>{t("dataSourcesCo2")}</ItemDescription>
-                  <ItemDescription>{t("dataSourcesTemperature")}</ItemDescription>
-                  <ItemDescription>{t("dataSourcesSealevel")}</ItemDescription>
-                  <ItemDescription>{t("dataSourcesPrecipitation")}</ItemDescription>
-                  <ItemDescription>{t("dataSourcesGlacier")}</ItemDescription>
+                  <ItemDescription>{ t("dataSourcesCo2") }</ItemDescription>
+                  <ItemDescription>{ t("dataSourcesTemperature") }</ItemDescription>
+                  <ItemDescription>{ t("dataSourcesSealevel") }</ItemDescription>
+                  <ItemDescription>{ t("dataSourcesPrecipitation") }</ItemDescription>
+                  <ItemDescription>{ t("dataSourcesGlacier") }</ItemDescription>
+                  <ItemDescription>{ t("dataSourcesAirquality") }</ItemDescription>
                 </div>
               </div>
             </div>
