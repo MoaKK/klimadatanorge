@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Co2Layer } from "./Co2Layer";
 import { Co2Slider } from "./Co2Slider";
 import { Co2Chart } from "./Co2Chart";
@@ -14,6 +14,7 @@ type Props = {
 
 function Co2Mode({ data, minYear, maxYear }: Props) {
   const [year, setYear] = useState(maxYear);
+  const urlTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
@@ -22,7 +23,11 @@ function Co2Mode({ data, minYear, maxYear }: Props) {
   }, [minYear, maxYear]);
 
   useEffect(() => {
-    window.history.replaceState(null, "", `?year=${year}`);
+    if (urlTimeout.current) clearTimeout(urlTimeout.current);
+    urlTimeout.current = setTimeout(() => {
+      window.history.replaceState(null, "", `?year=${year}`);
+    }, 300);
+    return () => { if (urlTimeout.current) clearTimeout(urlTimeout.current); };
   }, [year]);
 
   return (
