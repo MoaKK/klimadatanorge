@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { GeoJSONSource } from "maplibre-gl";
 import { useMapStore } from "@/store/mapStore";
 import type { TemperatureData } from "@/types/temperature";
@@ -16,6 +16,7 @@ function TemperatureLayer({ data, year }: Props) {
   const map = useMapStore((s) => s.map);
   const [layersReady, setLayersReady] = useState(false);
   const colorScale = useMemo(() => buildColorScale(data), [data]);
+  const fcCache = useRef(new Map<number, ReturnType<typeof buildFC>>());
 
   useEffect(() => {
     if (!map) return;
@@ -74,7 +75,12 @@ function TemperatureLayer({ data, year }: Props) {
     if (!map || !layersReady) return;
     const yearIndex = data.years.indexOf(year);
     try {
-      (map.getSource(SOURCE_ID) as GeoJSONSource)?.setData(buildFC(data, yearIndex, colorScale));
+      let fc = fcCache.current.get(yearIndex);
+      if (!fc) {
+        fc = buildFC(data, yearIndex, colorScale);
+        fcCache.current.set(yearIndex, fc);
+      }
+      (map.getSource(SOURCE_ID) as GeoJSONSource)?.setData(fc);
       const mean = getNorwayMean(data, yearIndex);
       const label = mean !== null ? `${mean >= 0 ? "+" : ""}${mean.toFixed(2)}°C` : "";
       (map.getSource(LABEL_SOURCE_ID) as GeoJSONSource)?.setData({

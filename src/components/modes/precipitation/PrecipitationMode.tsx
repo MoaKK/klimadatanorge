@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { PrecipitationData } from "@/types/precipitation";
 import { MIN_YEAR, MAX_YEAR } from "@/data/precipitation";
 import { PrecipitationLayer } from "./PrecipitationLayer";
@@ -11,6 +11,16 @@ type Props = { data: PrecipitationData };
 
 function PrecipitationMode({ data }: Props) {
   const [year, setYear] = useState(MAX_YEAR);
+
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    const y = parseInt(p.get("year") ?? "", 10);
+    if (Number.isFinite(y) && y >= MIN_YEAR && y <= MAX_YEAR) setYear(y);
+  }, []);
+
+  useEffect(() => {
+    window.history.replaceState(null, "", `?year=${year}`);
+  }, [year]);
 
   return (
     <>
