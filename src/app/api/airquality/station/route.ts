@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 const AQ_BASE = "https://api.met.no/weatherapi/airqualityforecast/0.1";
-const HEADERS = { "User-Agent": "klimadatanorge/1.0 github.com/MoaKK/klimakart" };
+const HEADERS = { "User-Agent": "klimadatanorge/1.0 github.com/MoaKK/klimadatanorge" };
 
 export async function GET(req: NextRequest) {
   const eoi = req.nextUrl.searchParams.get("eoi");

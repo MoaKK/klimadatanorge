@@ -6,7 +6,7 @@ import { QueryProvider } from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "Klima Data Norge",
-  description: "Interactive climate maps for Norway",
+  description: "Interactive climate maps for Norway - CO₂, temperature, sea level, precipitation, glaciers, and air quality.",
 };
 
 async function RootLayout({ children }: { children: ReactNode }) {

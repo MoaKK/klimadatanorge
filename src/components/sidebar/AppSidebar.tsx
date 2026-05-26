@@ -60,9 +60,9 @@ function AppSidebar() {
   return (
     <Sidebar variant="inset" collapsible="icon">
       <SidebarHeader>
-        <SidebarMenu className="">
+        <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild tooltip={ tNav("appName") }>
+            <SidebarMenuButton className="mb-5" size="lg" asChild tooltip={ tNav("appName") }>
               <Link href="/">
                 <Map className="size-4 shrink-0 ml-2 sm:size-5" aria-hidden="true" />
                 <span className="text-sm font-semibold group-data-[collapsible=icon]:hidden sm:text-base">
@@ -78,9 +78,11 @@ function AppSidebar() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/github-icon.svg"
-                  className="size-4 shrink-0 invert"
+                  alt=""
+                  className="size-4 shrink-0 invert opacity-60"
                   aria-hidden="true"
                 />
                 <span>Github</span>
