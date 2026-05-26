@@ -62,7 +62,7 @@
       "chartAriaLabel": "Linjediagram over Norges gjennomsnittlige årlige nedbør over tid"
     },
     "glacier": {
-      "title": "Breretrett",
+      "title": "Bretilbakegang",
       "description": "Historiske breutbredelser i Norge (NVE, 1947-2019)",
       "sliderHelp": "Velg en kartleggingsperiode for å se breutbredelsen i Norge og zoom inn for å se breer. Hvert polygon er en kartlagt bre. Totalt areal har sunket fra 3 350 km² i 1947-1985 til 2 328 km² i 2018-2019.\n\nMerk: kartleggingene fra 1988-1997 og 1999-2006 dekket bare større breer, så totalt areal er ikke direkte sammenlignbart med de heldekkende kartleggingene.\n\n Trykk på avspillingsknappen for å gå gjennom alle periodene automatisk.\n\n Klikk på et brepolygon for å se navn og areal.",
       "sliderAriaLabel": "Velg kartleggingsperiode",
