@@ -64,7 +64,7 @@ async function LocaleLayout({ children, params }: Props) {
             <div className="absolute top-2 left-2 z-30">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <SidebarTrigger variant="secondary" aria-label={t("toggleSidebar")} />
+                  <SidebarTrigger variant="secondary" aria-label={t("toggleSidebar")} className="[&_svg]:!size-5 sm:[&_svg]:!size-6 size-9 sm:size-10 "/>
                 </TooltipTrigger>
                 <TooltipContent side="right">{t("toggleSidebar")}</TooltipContent>
               </Tooltip>
