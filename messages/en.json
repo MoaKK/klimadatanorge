@@ -60,6 +60,15 @@
       "sliderHelp": "Drag the slider to explore annual precipitation totals across Norway year by year. Darker blue means more rainfall.\n\nData covers 1940 to 2024 from the ERA5 reanalysis dataset. Values show average mm per year across grid cells clipped to Norway.\n\n Press play to animate through the years automatically.",
       "sliderAriaLabel": "Select year for precipitation data",
       "chartAriaLabel": "Line chart of Norway average annual precipitation over time"
+    },
+    "glacier": {
+      "title": "Glacier Retreat",
+      "description": "Historical glacier extents across Norway (NVE, 1947-2019)",
+      "sliderHelp": "Select a survey period to see glacier extents across Norway and zoom in to see glaciers. Each polygon is a mapped glacier. Total area has fallen from 3,350 km² in 1947-1985 to 2,328 km² in 2018-2019.\n\nNote: the 1988-1997 and 1999-2006 surveys only covered larger glaciers so their totals are not directly comparable with the comprehensive inventories.\n\n Press play to step through all periods automatically.\n\n Click any glacier polygon to see its name and area.",
+      "sliderAriaLabel": "Select glacier survey period",
+      "chartTitle": "Total mapped area (km²)",
+      "chartAriaLabel": "Bar chart of total mapped glacier area per survey period",
+      "unnamedGlacier": "Unnamed glacier"
     }
   },
   "ui": {

@@ -60,6 +60,15 @@
       "sliderHelp": "Dra glidebryteren for å utforske årlige nedbørtotaler i Norge år for år. Mørkere blå betyr mer nedbør.\n\nData dekker 1940 til 2024 fra ERA5-reanalysedatasettet. Verdiene viser gjennomsnittlig mm per år over rutenettceller klippet til Norge.\n\n Trykk på avspillingsknappen for å animere gjennom årene automatisk.",
       "sliderAriaLabel": "Velg år for nedbørdata",
       "chartAriaLabel": "Linjediagram over Norges gjennomsnittlige årlige nedbør over tid"
+    },
+    "glacier": {
+      "title": "Breretrett",
+      "description": "Historiske breutbredelser i Norge (NVE, 1947-2019)",
+      "sliderHelp": "Velg en kartleggingsperiode for å se breutbredelsen i Norge og zoom inn for å se breer. Hvert polygon er en kartlagt bre. Totalt areal har sunket fra 3 350 km² i 1947-1985 til 2 328 km² i 2018-2019.\n\nMerk: kartleggingene fra 1988-1997 og 1999-2006 dekket bare større breer, så totalt areal er ikke direkte sammenlignbart med de heldekkende kartleggingene.\n\n Trykk på avspillingsknappen for å gå gjennom alle periodene automatisk.\n\n Klikk på et brepolygon for å se navn og areal.",
+      "sliderAriaLabel": "Velg kartleggingsperiode",
+      "chartTitle": "Totalt kartlagt areal (km²)",
+      "chartAriaLabel": "Stolpediagram over totalt kartlagt breareal per kartleggingsperiode",
+      "unnamedGlacier": "Uten navn"
     }
   },
   "ui": {

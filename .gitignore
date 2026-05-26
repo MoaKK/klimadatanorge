@@ -49,3 +49,4 @@ scripts/node_modules/
 # Raw climate data source files (large, preprocessed output committed instead)
 public/data/*.nc
 public/data/*.nc.gz
+preprocessing/*.zip

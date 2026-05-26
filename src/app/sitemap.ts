@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://klimadatanorge.no";
 const locales = ["nb", "en"];
-const routes = ["/", "/co2", "/temperature", "/sealevel", "/precipitation"];
+const routes = ["/", "/co2", "/temperature", "/sealevel", "/precipitation", "/glacier"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.flatMap((locale) =>
