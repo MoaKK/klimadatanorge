@@ -87,7 +87,8 @@
       "close": "Close",
       "loading": "Loading...",
       "error": "Failed to load data",
-      "updatedLabel": "Model run"
+      "updatedLabel": "Model run",
+      "noData": "No data available"
     }
   },
   "ui": {

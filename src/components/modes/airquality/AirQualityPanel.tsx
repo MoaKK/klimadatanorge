@@ -1,7 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useFormatter } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useStationAQI } from "@/hooks/useAirQuality";
 
@@ -12,24 +12,19 @@ type Props = {
   onClose: () => void;
 };
 
-function getAQIColor(aqi: number): string {
-  if (aqi < 2) return "#3F9F41";
-  if (aqi < 3) return "#FFCB00";
-  if (aqi < 4) return "#FF8C00";
-  return "#CF0000";
-}
-
 type AQIKey = "aqiLow" | "aqiModerate" | "aqiHigh" | "aqiVeryHigh";
+type AQIInfo = { color: string; key: AQIKey };
 
-function getAQIKey(aqi: number): AQIKey {
-  if (aqi < 2) return "aqiLow";
-  if (aqi < 3) return "aqiModerate";
-  if (aqi < 4) return "aqiHigh";
-  return "aqiVeryHigh";
+function getAQIInfo(aqi: number): AQIInfo {
+  if (aqi < 2) return { color: "#3F9F41", key: "aqiLow" };
+  if (aqi < 3) return { color: "#FFCB00", key: "aqiModerate" };
+  if (aqi < 4) return { color: "#FF8C00", key: "aqiHigh" };
+  return { color: "#CF0000", key: "aqiVeryHigh" };
 }
 
 function AirQualityPanel({ eoi, stationName, kommune, onClose }: Props) {
   const t = useTranslations("modes.airquality");
+  const format = useFormatter();
   const { data, isLoading, isError } = useStationAQI(eoi);
 
   if (!eoi) return null;
@@ -40,6 +35,8 @@ function AirQualityPanel({ eoi, stationName, kommune, onClose }: Props) {
   const pm25 = current?.variables.pm25_concentration?.value;
   const pm10 = current?.variables.pm10_concentration?.value;
   const o3 = current?.variables.o3_concentration?.value;
+
+  const aqiInfo = aqi != null ? getAQIInfo(aqi) : null;
 
   return (
     <div className="absolute right-4 top-5 z-10 w-64 animate-in fade-in duration-200">
@@ -68,14 +65,18 @@ function AirQualityPanel({ eoi, stationName, kommune, onClose }: Props) {
           <p className="text-xs text-destructive">{t("error")}</p>
         )}
 
-        {data && aqi != null && (
+        {data && !aqiInfo && (
+          <p className="text-xs text-muted-foreground">{t("noData")}</p>
+        )}
+
+        {data && aqiInfo && aqi != null && (
           <>
             <div className="mb-3 flex items-center gap-2">
               <span
                 className="inline-block h-3 w-3 rounded-full shrink-0"
-                style={{ backgroundColor: getAQIColor(aqi) }}
+                style={{ backgroundColor: aqiInfo.color }}
               />
-              <span className="font-semibold text-sm">{t(getAQIKey(aqi))}</span>
+              <span className="font-semibold text-sm">{t(aqiInfo.key)}</span>
               <span className="text-xs text-muted-foreground ml-auto tabular-nums">
                 {t("aqiLabel")} {aqi.toFixed(1)}
               </span>
@@ -109,7 +110,7 @@ function AirQualityPanel({ eoi, stationName, kommune, onClose }: Props) {
             </div>
 
             <p className="mt-2.5 text-[10px] text-muted-foreground">
-              {t("updatedLabel")}: {new Date(data.meta.reftime).toLocaleDateString()}
+              {t("updatedLabel")}: {format.dateTime(new Date(data.meta.reftime), { dateStyle: "medium" })}
             </p>
           </>
         )}

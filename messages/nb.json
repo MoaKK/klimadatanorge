@@ -87,7 +87,8 @@
       "close": "Lukk",
       "loading": "Laster...",
       "error": "Kunne ikke laste data",
-      "updatedLabel": "Modellkjøring"
+      "updatedLabel": "Modellkjøring",
+      "noData": "Ingen data tilgjengelig"
     }
   },
   "ui": {
