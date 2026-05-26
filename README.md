@@ -1,6 +1,6 @@
 # Klima Data Norge
 
-Klima Data Norge visualises climate data for Norway on an interactive maps.
+Interactive maps of climate data for Norway.
 
 ## Modes
 
@@ -10,6 +10,8 @@ Klima Data Norge visualises climate data for Norway on an interactive maps.
 | Temperature Anomaly | Norway | NASA GISS Surface Temperature Analysis (GISTEMP v4) |
 | Sea Level Rise | Global | IPCC AR6 WG1, Terrarium elevation tiles |
 | Precipitation | Norway | ERA5 / Copernicus Climate Data Store |
+| Glacier Retreat | Norway | NVE Norwegian Glacier Inventory |
+| Air Quality | Norway | Norwegian Meteorological Institute (met.no) |
 
 ## Stack
 
@@ -17,8 +19,8 @@ Klima Data Norge visualises climate data for Norway on an interactive maps.
 - **Map:** MapLibre GL JS 5, OpenFreeMap basemap
 - **Charts:** D3
 - **UI:** shadcn/ui, Tailwind CSS v4
+- **Data fetching:** TanStack Query
 - **i18n:** next-intl (Norwegian bokmål and English)
-- **Homepage:** Vanta.js globe (Three.js)
 
 ## Running locally
 
@@ -26,15 +28,3 @@ Klima Data Norge visualises climate data for Norway on an interactive maps.
 npm install
 npm run dev
 ```
-
-## Data preprocessing
-
-Climate data is preprocessed into static JSON files under `public/data/` using Python scripts in `preprocessing/`. These are one-time scripts and do not need to be re-run unless the source data changes.
-
-```bash
-cd preprocessing
-pip install cdsapi xarray numpy shapely
-python preprocess_precipitation.py  # requires ~/.cdsapirc with Copernicus CDS credentials
-```
-
-Temperature and CO₂ data are bundled from their respective sources and preprocessed similarly.

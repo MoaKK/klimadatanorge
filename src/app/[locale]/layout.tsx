@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isNb = locale === "nb";
   const title = isNb ? "Klima Data Norge" : "Climate Data Norway";
   const description = isNb
-    ? "Interaktivt kart over klimadata for Norge – CO₂-utslipp, temperaturavvik, havnivåstigning og nedbør."
-    : "Interactive map of climate data for Norway – CO₂ emissions, temperature anomaly, sea level rise, and precipitation.";
+    ? "Interaktive kart over klimadata for Norge - CO₂-utslipp, temperaturavvik, havnivåstigning, nedbør, bretilbakegang og luftkvalitet."
+    : "Interactive maps of climate data for Norway - CO₂ emissions, temperature anomaly, sea level rise, precipitation, glacier retreat, and air quality.";
 
   return {
     title: { default: title, template: `%s | ${title}` },
@@ -56,7 +56,7 @@ async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations("ui");
 
   return (
-    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
+    <NextIntlClientProvider key={ locale } locale={ locale } messages={ messages }>
       <TooltipProvider>
         <SidebarProvider>
           <AppSidebar />
@@ -64,12 +64,12 @@ async function LocaleLayout({ children, params }: Props) {
             <div className="absolute top-2 left-2 z-30">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <SidebarTrigger variant="secondary" aria-label={t("toggleSidebar")} className="[&_svg]:!size-5 sm:[&_svg]:!size-6 size-9 sm:size-10 "/>
+                  <SidebarTrigger variant="secondary" aria-label={ t("toggleSidebar") } className="[&_svg]:!size-5 sm:[&_svg]:!size-6 size-9 sm:size-10 " />
                 </TooltipTrigger>
-                <TooltipContent side="right">{t("toggleSidebar")}</TooltipContent>
+                <TooltipContent side="right">{ t("toggleSidebar") }</TooltipContent>
               </Tooltip>
             </div>
-            {children}
+            { children }
           </SidebarInset>
         </SidebarProvider>
       </TooltipProvider>

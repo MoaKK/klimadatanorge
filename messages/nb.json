@@ -1,7 +1,7 @@
 {
   "home": {
     "aboutTitle": "Om denne nettsiden",
-    "aboutBody1": "Denne nettsiden viser fem klimaindikatorer for Norge: CO₂-utslipp, temperaturavvik, forventet havnivåstigning, historisk nedbør og breretrett. All data er hentet fra åpne vitenskapelige kilder.",
+    "aboutBody1": "Denne nettsiden viser seks klimaindikatorer for Norge: CO₂-utslipp, temperaturavvik, forventet havnivåstigning, historisk nedbør, bretilbakegang og aktuell luftkvalitet. All data er hentet fra åpne vitenskapelige kilder.",
     "aboutBody2": "Tallene bør forstås som tilnærminger. Temperatur og nedbør kommer fra reanalysemodeller (NASA GISS og ERA5), som kombinerer observasjoner med atmosfærisk modellering. Havnivåprojeksjonene følger globale medianestimater fra IPCC AR6 og tar ikke hensyn til lokal landhevning eller regionale havvariasjoner. CO₂-tallene er nasjonale totaler fra Our World in Data. Breutbredelsene er kartleggingssnapshots, ikke kontinuerlige målinger, og dekningsgraden varierer mellom periodene.",
     "aboutBody3": "Dette er et porteføljeprosjekt, ikke et vitenskapelig verktøy. For autoritative klimadata, se Miljødirektoratet eller Meteorologisk institutt.",
     "dataSourcesTitle": "Datakilder",
@@ -9,7 +9,8 @@
     "dataSourcesTemperature": "Temperatur: NASA GISS",
     "dataSourcesSealevel": "Havnivå: IPCC AR6",
     "dataSourcesPrecipitation": "Nedbør: ERA5 / Copernicus",
-    "dataSourcesGlacier": "Breer: NVE Norsk breiatlas"
+    "dataSourcesGlacier": "Breer: NVE Norsk breiatlas",
+    "dataSourcesAirquality": "Luftkvalitet: Meteorologisk institutt (met.no)"
   },
   "locale": {
     "nb": "Norsk",
@@ -25,7 +26,9 @@
   "nav": {
     "appName": "Klima Data Norge",
     "modes": "Kartlag",
-    "about": "Om"
+    "about": "Om",
+    "historicalMaps": "Historiske kart",
+    "liveMaps": "Sanntidskart"
   },
   "modes": {
     "co2": {
@@ -70,6 +73,22 @@
       "chartTitle": "Totalt kartlagt areal (km²)",
       "chartAriaLabel": "Stolpediagram over totalt kartlagt breareal per kartleggingsperiode",
       "unnamedGlacier": "Uten navn"
+    },
+    "airquality": {
+      "title": "Luftkvalitet",
+      "description": "Luftkvalitetsprognose for norske målestasjoner (met.no)",
+      "help": "Kartet viser luftkvalitetsmålestasjoner i Norge. Data kommer fra Meteorologisk institutts prognosemodell, oppdatert daglig.\n\nKlikk på en stasjon (lilla prikk) for å se luftkvalitetsindeksen (AQI) og konsentrasjoner av NO₂, PM2.5, PM10 og ozon (O₃).\n\nAQI-skala: Lite (1-2), Moderat (2-3), Høy (3-4), Svært høy (4+).",
+      "clickHint": "Klikk på en stasjon for å se luftkvalitet",
+      "aqiLabel": "AQI",
+      "aqiLow": "Lite",
+      "aqiModerate": "Moderat",
+      "aqiHigh": "Høy",
+      "aqiVeryHigh": "Svært høy",
+      "close": "Lukk",
+      "loading": "Laster...",
+      "error": "Kunne ikke laste data",
+      "updatedLabel": "Modellkjøring",
+      "noData": "Ingen data tilgjengelig"
     }
   },
   "ui": {

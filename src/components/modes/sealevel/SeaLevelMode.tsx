@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SeaLevelLayer } from "./SeaLevelLayer";
 import { SeaLevelSlider } from "./SeaLevelSlider";
 import { SeaLevelChart } from "./SeaLevelChart";
@@ -12,6 +12,7 @@ const VALID_SCENARIOS: Scenario[] = ["low", "medium", "high"];
 function SeaLevelMode() {
   const [year, setYear] = useState(MIN_YEAR);
   const [scenario, setScenario] = useState<Scenario>("medium");
+  const urlTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
@@ -22,7 +23,11 @@ function SeaLevelMode() {
   }, []);
 
   useEffect(() => {
-    window.history.replaceState(null, "", `?year=${year}&scenario=${scenario}`);
+    if (urlTimeout.current) clearTimeout(urlTimeout.current);
+    urlTimeout.current = setTimeout(() => {
+      window.history.replaceState(null, "", `?year=${year}&scenario=${scenario}`);
+    }, 300);
+    return () => { if (urlTimeout.current) clearTimeout(urlTimeout.current); };
   }, [year, scenario]);
 
   return (

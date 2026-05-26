@@ -1,4 +1,4 @@
-import { CloudRain, Factory, MountainSnow, Thermometer, Waves } from "lucide-react";
+import { CloudRain, Factory, MountainSnow, Thermometer, Waves, Wind } from "lucide-react";
 
 const MODES = [
   { key: "co2", href: "/co2", icon: Factory },
@@ -6,6 +6,7 @@ const MODES = [
   { key: "sealevel", href: "/sealevel", icon: Waves },
   { key: "precipitation", href: "/precipitation", icon: CloudRain },
   { key: "glacier", href: "/glacier", icon: MountainSnow },
+  { key: "airquality", href: "/airquality", icon: Wind },
 ] as const;
 
 export { MODES };

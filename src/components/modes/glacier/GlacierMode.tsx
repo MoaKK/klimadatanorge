@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GlacierLayer } from "./GlacierLayer";
 import { GlacierSlider } from "./GlacierSlider";
 import { GlacierChart } from "./GlacierChart";
@@ -8,6 +8,7 @@ import { PERIODS } from "./utils";
 
 function GlacierMode() {
   const [periodIndex, setPeriodIndex] = useState(PERIODS.length - 1);
+  const urlTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
@@ -16,7 +17,11 @@ function GlacierMode() {
   }, []);
 
   useEffect(() => {
-    window.history.replaceState(null, "", `?period=${periodIndex}`);
+    if (urlTimeout.current) clearTimeout(urlTimeout.current);
+    urlTimeout.current = setTimeout(() => {
+      window.history.replaceState(null, "", `?period=${periodIndex}`);
+    }, 300);
+    return () => { if (urlTimeout.current) clearTimeout(urlTimeout.current); };
   }, [periodIndex]);
 
   return (
