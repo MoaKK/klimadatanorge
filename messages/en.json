@@ -30,21 +30,21 @@
     "co2": {
       "title": "CO\u2082 Emissions",
       "description": "Annual CO\u2082 emissions for Norway",
-      "sliderHelp": "Drag the slider to explore Norway\u2019s CO\u2082 emissions year by year. Darker shades mean higher emissions.",
+      "sliderHelp": "Drag the slider to explore Norway\u2019s CO\u2082 emissions year by year. Darker shades mean higher emissions.\n\n Press play to animate through the years automatically.",
       "sliderAriaLabel": "Select year for CO\u2082 emissions data",
       "chartAriaLabel": "Line chart of Norway\u2019s CO\u2082 emissions over time"
     },
     "temperature": {
       "title": "Temperature Anomaly",
       "description": "Surface temperature anomaly relative to 1951\u20131980 baseline",
-      "sliderHelp": "Drag the slider to explore Norway\u2019s surface temperature anomaly year by year. Red means warmer than average, blue means cooler.",
+      "sliderHelp": "Drag the slider to explore Norway\u2019s surface temperature anomaly year by year. Red means warmer than average, blue means cooler. \n\n Press play to animate through the years automatically.",
       "sliderAriaLabel": "Select year for temperature anomaly data",
       "chartAriaLabel": "Line chart of Norway\u2019s average temperature anomaly over time"
     },
     "sealevel": {
       "title": "Sea Level Rise",
       "description": "Projected global sea level rise by emissions scenario (IPCC AR6)",
-      "sliderHelp": "Drag the slider to explore projected global sea level rise every 10 year (2020-2100), including Norway and coastlines worldwide. The blue overlay shows land areas that would fall below the rising sea level.\n\nZoom in for more detail along coastlines. Switch between emissions scenarios to compare outcomes.\n\nProjections are global median estimates (IPCC AR6). Local sea level may vary and coastal elevation accuracy is limited, so treat this as an approximation.",
+      "sliderHelp": "Drag the slider to explore projected global sea level rise every 10 year (2020-2100), including Norway and coastlines worldwide. The blue overlay shows land areas that would fall below the rising sea level.\n\nZoom in for more detail along coastlines. Switch between emissions scenarios to compare outcomes.\n\nProjections are global median estimates (IPCC AR6). Local sea level may vary and coastal elevation accuracy is limited, so treat this as an approximation.\n\n Press play to animate through the decades automatically.",
       "sliderAriaLabel": "Select year for sea level projection",
       "scenarioLabel": "Emissions scenario",
       "chartAriaLabel": "Line chart of projected global sea level rise by scenario",
@@ -57,7 +57,7 @@
     "precipitation": {
       "title": "Precipitation",
       "description": "Historical annual precipitation totals for Norway (ERA5, 1940-2024)",
-      "sliderHelp": "Drag the slider to explore annual precipitation totals across Norway year by year. Darker blue means more rainfall.\n\nData covers 1940 to 2024 from the ERA5 reanalysis dataset. Values show average mm per year across grid cells clipped to Norway.",
+      "sliderHelp": "Drag the slider to explore annual precipitation totals across Norway year by year. Darker blue means more rainfall.\n\nData covers 1940 to 2024 from the ERA5 reanalysis dataset. Values show average mm per year across grid cells clipped to Norway.\n\n Press play to animate through the years automatically.",
       "sliderAriaLabel": "Select year for precipitation data",
       "chartAriaLabel": "Line chart of Norway average annual precipitation over time"
     }
@@ -68,7 +68,9 @@
     "retry": "Try again",
     "refresh": "Refresh page",
     "toggleSidebar": "Toggle sidebar",
-    "help": "Help"
+    "help": "Help",
+    "play": "Play",
+    "pause": "Pause"
   },
   "errors": {
     "network": "Network error. Check your connection and try again.",

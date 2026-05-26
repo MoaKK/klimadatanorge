@@ -24,7 +24,7 @@ function ModeHelp({ children, className }: Props) {
       <PopoverTrigger asChild>
         <Button
           className={cn(
-            "text-primary transition-colors hover:text-foreground",
+            "text-secondary transition-colors hover:text-foreground",
             className
           )}
           variant="ghost"
