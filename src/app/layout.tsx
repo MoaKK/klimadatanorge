@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { ReactNode } from "react";
 import "./globals.css";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
-  title: "Klimakart",
-  description: "Norwegian climate change interactive map",
+  title: "Klima Data Norge",
+  description: "Interactive climate maps for Norway",
 };
 
 async function RootLayout({ children }: { children: ReactNode }) {
@@ -13,7 +14,9 @@ async function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang={locale} className="dark">
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
