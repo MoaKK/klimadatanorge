@@ -32,6 +32,7 @@ function AboutPanel() {
                   <ItemDescription>{t("dataSourcesTemperature")}</ItemDescription>
                   <ItemDescription>{t("dataSourcesSealevel")}</ItemDescription>
                   <ItemDescription>{t("dataSourcesPrecipitation")}</ItemDescription>
+                  <ItemDescription>{t("dataSourcesGlacier")}</ItemDescription>
                 </div>
               </div>
             </div>

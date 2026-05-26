@@ -1,14 +1,15 @@
 {
   "home": {
     "aboutTitle": "Om denne nettsiden",
-    "aboutBody1": "Denne nettsiden viser fire klimaindikatorer for Norge: CO\u2082-utslipp, temperaturavvik, forventet havnivåstigning og historisk nedbør. All data er hentet fra åpne vitenskapelige kilder.",
-    "aboutBody2": "Tallene bør forstås som tilnærminger. Temperatur og nedbør kommer fra reanalysemodeller (NASA GISS og ERA5), som kombinerer observasjoner med atmosfærisk modellering. Havnivåprojeksjonene følger globale medianestimater fra IPCC AR6 og tar ikke hensyn til lokal landhevning eller regionale havvariasjoner. CO\u2082-tallene er nasjonale totaler fra Our World in Data.",
+    "aboutBody1": "Denne nettsiden viser fem klimaindikatorer for Norge: CO₂-utslipp, temperaturavvik, forventet havnivåstigning, historisk nedbør og breretrett. All data er hentet fra åpne vitenskapelige kilder.",
+    "aboutBody2": "Tallene bør forstås som tilnærminger. Temperatur og nedbør kommer fra reanalysemodeller (NASA GISS og ERA5), som kombinerer observasjoner med atmosfærisk modellering. Havnivåprojeksjonene følger globale medianestimater fra IPCC AR6 og tar ikke hensyn til lokal landhevning eller regionale havvariasjoner. CO₂-tallene er nasjonale totaler fra Our World in Data. Breutbredelsene er kartleggingssnapshots, ikke kontinuerlige målinger, og dekningsgraden varierer mellom periodene.",
     "aboutBody3": "Dette er et porteføljeprosjekt, ikke et vitenskapelig verktøy. For autoritative klimadata, se Miljødirektoratet eller Meteorologisk institutt.",
     "dataSourcesTitle": "Datakilder",
     "dataSourcesCo2": "CO\u2082: Our World in Data",
     "dataSourcesTemperature": "Temperatur: NASA GISS",
     "dataSourcesSealevel": "Havnivå: IPCC AR6",
-    "dataSourcesPrecipitation": "Nedbør: ERA5 / Copernicus"
+    "dataSourcesPrecipitation": "Nedbør: ERA5 / Copernicus",
+    "dataSourcesGlacier": "Breer: NVE Norsk breiatlas"
   },
   "locale": {
     "nb": "Norsk",

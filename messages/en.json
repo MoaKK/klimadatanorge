@@ -1,14 +1,15 @@
 {
   "home": {
     "aboutTitle": "About this website",
-    "aboutBody1": "This website shows four climate indicators for Norway: CO\u2082 emissions, surface temperature anomaly, projected sea level rise, and historical precipitation. All data comes from open scientific sources.",
-    "aboutBody2": "The numbers are best understood as approximations. Temperature and precipitation come from reanalysis models (NASA GISS and ERA5), which blend observations with atmospheric modelling rather than reading directly from sensors. Sea level projections follow IPCC AR6 global medians and do not account for local land movement or regional ocean variation. CO\u2082 figures are national totals.",
+    "aboutBody1": "This website shows five climate indicators for Norway: CO₂ emissions, surface temperature anomaly, projected sea level rise, historical precipitation, and glacier retreat. All data comes from open scientific sources.",
+    "aboutBody2": "The numbers are best understood as approximations. Temperature and precipitation come from reanalysis models (NASA GISS and ERA5), which blend observations with atmospheric modelling rather than reading directly from sensors. Sea level projections follow IPCC AR6 global medians and do not account for local land movement or regional ocean variation. CO₂ figures are national totals. Glacier outlines are survey snapshots, not continuous measurements, and coverage varies between periods.",
     "aboutBody3": "This is a portfolio project, not a scientific tool. For authoritative climate data, consult the Norwegian Environment Agency or the Norwegian Meteorological Institute.",
     "dataSourcesTitle": "Data sources",
     "dataSourcesCo2": "CO\u2082: Our World in Data",
     "dataSourcesTemperature": "Temperature: NASA GISS",
     "dataSourcesSealevel": "Sea level: IPCC AR6",
-    "dataSourcesPrecipitation": "Precipitation: ERA5 / Copernicus"
+    "dataSourcesPrecipitation": "Precipitation: ERA5 / Copernicus",
+    "dataSourcesGlacier": "Glaciers: NVE Norwegian Glacier Inventory"
   },
   "locale": {
     "nb": "Norwegian",
